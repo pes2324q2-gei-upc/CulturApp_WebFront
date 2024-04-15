@@ -8,13 +8,12 @@ import Header from './Header';
 import ReportBug from './ReportBug';
 import ReportUser from './ReportUser';
 import RequestOrg from './RequestOrg';
-import Login from './Login';
 
 function App() {
   return (
     <Router>
       <div style={{ display: 'flex', height: '100vh' }}>
-        <div style={{ flex: '0 0 200px', backgroundColor: 'rgb(255, 183, 0)', padding: '20px' }}>
+        <div style={{ flex: '0 0 200px', backgroundColor: 'lightgray', padding: '20px' }}>
           {/* Routes inside the left gray space */}
           <Header />
         </div>
@@ -25,7 +24,6 @@ function App() {
             <Route path="/report-bug" element={<ReportBug />} />
             <Route path="/report-user" element={<ReportUser />} />
             <Route path="/request-org" element={<RequestOrg />} />
-            <Route path="/login" element={<Login />} />
           </Routes>
         </div>
       </div>
