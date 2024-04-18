@@ -1,43 +1,25 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { AuthData }  from "../Logic/AuthWrapper";
+import { AuthData, AuthWrapper }   from "../Logic/AuthWrapper";
 import "../Login.css"
 
 export const Login = () => {
   const { login } = AuthData();
   const [formData, setFormData] = useState({ username: "", password: "" });
   const [errorMessage, setErrorMessage] = useState(null);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     const { username, password } = formData;
 
     try {
-      const response = await fetch('http://localhost:8080/admin/login', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ username, password }),
-      });
-
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-
-      const data = await response.text();
-
-      if (data === 'OK') {
-        // Redirect user to authenticated page or perform desired action
-        console.log('Login successful');
-      } else {
-        setErrorMessage(data);
-      }
+      await login(username, password); // Call the login function
+      navigate("/");
     } catch (error) {
-      console.error('Error:', error);
+      setErrorMessage(error.message);
     }
-  };
+  }
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;

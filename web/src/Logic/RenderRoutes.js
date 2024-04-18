@@ -1,11 +1,11 @@
 import { Route, Routes } from "react-router-dom";
-import { AuthData } from "../Logic/AuthWrapper"; // Import AuthData
+import { AuthData, AuthWrapper } from "../Logic/AuthWrapper"; // Import AuthWrapper
 import { nav } from "./Navigation";
 import Login from "../Pages/Login";
 import Home from "../Pages/Home"; // Import Home component
 
 export const RenderRoutes = () => {
-    const { user } = AuthData(); // Use AuthData to get the user
+    const { user } = AuthData(); // Use AuthWrapper to get the user
     
     return (
         <Routes>
