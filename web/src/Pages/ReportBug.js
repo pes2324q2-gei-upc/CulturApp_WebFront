@@ -13,7 +13,6 @@ function ReportBug() {
         const data = await response.json();
         setReports(data);
 
-        // Obtener el nombre de usuario para cada informe de error
         const updatedReports = await Promise.all(
           data.map(async (report) => {
             try {
@@ -47,7 +46,6 @@ function ReportBug() {
           <li key={report.id}>
             <h3>{report.errorApp}</h3>
             <p>Usuario: {report.username}</p>
-            {/* Otros datos del informe de errores */}
           </li>
         ))}
       </ul>
