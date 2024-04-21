@@ -1,0 +1,34 @@
+.container {
+    display: flex;
+}
+
+.content {
+    flex: 1;
+    padding: 20px;
+}
+
+.container-menu {
+    position: fixed;
+    background: rgb(255, 183, 0);
+    width: 250px;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    padding: 20px; /* Añade padding para separar el contenido del borde del menú */
+}
+
+.container-menu nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0; /* Elimina el margen predeterminado de la lista */
+}
+
+.container-menu nav ul li {
+    margin-bottom: 10px; /* Espacio entre elementos de la lista */
+}
+
+.container-menu nav ul li a {
+    text-decoration: none;
+    color: black; /* Cambia el color del texto si lo deseas */
+    display: block;
+}
