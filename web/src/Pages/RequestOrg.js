@@ -2,7 +2,7 @@ import React from 'react';
 
 function RequestOrg() {
   return (
-    <div>
+    <div className="content">
       <h1>RequestOrg</h1>
       <p>About this application...</p>
     </div>

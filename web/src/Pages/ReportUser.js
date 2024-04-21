@@ -2,7 +2,7 @@ import React from 'react';
 
 function ReportUser() {
   return (
-    <div>
+    <div className="content">
       <h1>ReportUser</h1>
       <p>About this application...</p>
     </div>

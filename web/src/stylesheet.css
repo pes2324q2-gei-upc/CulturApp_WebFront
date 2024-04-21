@@ -1,34 +1,57 @@
-.container {
-    display: flex;
-}
 
 .content {
     flex: 1;
     padding: 20px;
+    margin-left: 290px;
+    width: 100%;
+    height: 100%;
 }
 
 .container-menu {
+    display: flex;
     position: fixed;
-    background: rgb(255, 183, 0);
+    background: #ff6e15;
     width: 250px;
-    height: 100vh;
-    top: 0;
-    left: 0;
-    padding: 20px; /* Añade padding para separar el contenido del borde del menú */
+    height: 100%;
+    flex-direction: column;
+}
+
+.container-menu h2 {
+    padding: 30px;
+    text-align: center;
+    color: white;
 }
 
 .container-menu nav ul {
     list-style: none;
     padding: 0;
-    margin: 0; /* Elimina el margen predeterminado de la lista */
+    margin: 0;
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
 }
 
+
 .container-menu nav ul li {
-    margin-bottom: 10px; /* Espacio entre elementos de la lista */
+    margin-bottom: 20px;
+    width: 100%;
+    text-align: center;
 }
 
 .container-menu nav ul li a {
     text-decoration: none;
-    color: black; /* Cambia el color del texto si lo deseas */
+    color: white;
     display: block;
+    padding: 10px 0;
+    height: 30px;
+    display: flex;
+    align-items: center; /* Centra verticalmente el texto */
+    justify-content: center;
+}
+
+.container-menu nav ul li a.active {
+    background-color: white;
+    color: #ff6e15;
 }
