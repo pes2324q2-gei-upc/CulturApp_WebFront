@@ -61,6 +61,16 @@
   .notification:hover .notibody {
     transform: translateX(0.25rem)
   }
+
+  ul {
+    padding-top: 2rem;
+    list-style-type: none;
+  }
+
+  li {
+    padding-top: 1rem;
+  }
+
   
   .notiglow,
   .notiborderglow {
