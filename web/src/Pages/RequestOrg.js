@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+
 
 function RequestOrg() {
   const [requests, setRequests] = useState([]);
@@ -42,10 +44,12 @@ function RequestOrg() {
     <div className="content">
       <h1>RequestOrg</h1>
       <ul>
-        {requests.map((request) => (
-          <li key={request.id}>
-            <h3>User: {request.userName}</h3>
-            <p>Activity: {request.activityInfo.denominaci}</p>
+        {requests.map((requests) => (
+          <li key={requests.id}>
+            <Link to={`${requests.id}`}>
+              <h3>{requests.errorApp}</h3>
+              <p>Usuario: {requests.username}</p>
+            </Link>
           </li>
         ))}
       </ul>

@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import "../RequestOrg.css"
+
 
 function ReportBug() {
   const [reports, setReports] = useState([]);
@@ -38,18 +41,30 @@ function ReportBug() {
     fetchReports();
   }, []);
 
+  const Notification = ({ reports }) => (
+    <div className="notification">
+      <div className="notiglow"></div>
+      <div className="notiborderglow"></div>
+      <div className="notititle">{reports.errorApp}</div>
+      <div className="notibody">Usuario: {reports.username}</div>
+    </div>
+  );
+
+
+
   return (
     <div className="content">
-      <h1>ReportBug</h1>
-      <ul>
-        {reports.map((report) => (
-          <li key={report.id}>
-            <h3>{report.errorApp}</h3>
-            <p>Usuario: {report.username}</p>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <h1>RequestOrg</h1>
+    <ul>
+      {reports.map((reports) => (
+        <li key={reports.id}>
+          <Link to={`${reports.id}`}>
+            <Notification reports={reports} />
+          </Link>
+        </li>
+      ))}
+    </ul>
+  </div>
   );
 }
 

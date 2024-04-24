@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+
 
 function ReportUser() {
   const [reports, setReports] = useState([]);
@@ -41,10 +43,12 @@ function ReportUser() {
       <ul>
         {reports.map((report) => (
           <li key={report.id}>
-            <h3> {report.motiuReport} </h3>
-            <p>User Reported: {report.userReportedUsername}</p>
-            <p>{report.description}</p>
-            <p>Reported By: {report.userReportUsername}</p>
+            <Link to={`${report.id}`}>
+              <h3> {report.motiuReport} </h3>
+              <p>User Reported: {report.userReportedUsername}</p>
+              <p>{report.description}</p>
+              <p>Reported By: {report.userReportUsername}</p>
+            </Link>
           </li>
         ))}
       </ul>
