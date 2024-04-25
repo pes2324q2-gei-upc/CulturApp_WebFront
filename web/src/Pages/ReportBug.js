@@ -54,11 +54,11 @@ function ReportBug() {
 
   return (
     <div className="content">
-    <h1>RequestOrg</h1>
+    <h1>Bug Reports</h1>
     <ul>
       {reports.map((reports) => (
         <li key={reports.id}>
-          <Link to={`${reports.id}`}>
+          <Link to={`${reports.id}`} style={{ textDecoration: 'none' }}>
             <Notification reports={reports} />
           </Link>
         </li>

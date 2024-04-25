@@ -42,7 +42,7 @@ function RequestOrg() {
 
   return (
     <div className="content">
-      <h1>RequestOrg</h1>
+      <h1>Request Event Organizer</h1>
       <ul>
         {requests.map((requests) => (
           <li key={requests.id}>

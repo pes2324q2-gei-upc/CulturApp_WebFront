@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import { AuthData, AuthWrapper } from "../Logic/AuthWrapper"; // Import AuthWrapper
+import { AuthData } from "../Logic/AuthWrapper"; // Import AuthWrapper
 import { nav } from "./Navigation";
 import Login from "../Pages/Login";
 import Home from "../Pages/Home"; // Import Home component

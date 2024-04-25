@@ -39,7 +39,7 @@ function ReportUser() {
 
   return (
     <div className="content">
-      <h1>ReportUser</h1>
+      <h1>User Report</h1>
       <ul>
         {reports.map((report) => (
           <li key={report.id}>
