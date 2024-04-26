@@ -47,14 +47,43 @@ function ReportBug() {
       <div className="notiborderglow"></div>
       <div className="notititle">{reports.errorApp}</div>
       <div className="notibody">Usuario: {reports.username}</div>
+      <Switch></Switch>
     </div>
   );
+
+  const filter = (event) => {
+  }
+
+
+  const Filter = () => (
+    <div className="filter">
+      <label htmlFor="checkbox_toggle" className="checkbox">
+        <input id="checkbox_toggle" type="checkbox" className="check" />
+        <div className="slide">
+          <span className="toggle"></span>
+          <span className="text">Day</span>
+          <span className="text">Night</span>
+        </div>
+      </label>
+    </div>
+  );
+  
+
+  const Switch = () => (
+    <label class="toggle-switch">
+      <input type="checkbox" />
+      <div class="toggle-switch-background">
+        <div class="toggle-switch-handle"></div>
+      </div>
+    </label>
+  )
 
 
 
   return (
     <div className="content">
     <h1>Bug Reports</h1>
+    <Filter></Filter>
     <ul>
       {reports.map((reports) => (
         <li key={reports.id}>
