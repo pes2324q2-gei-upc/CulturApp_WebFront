@@ -9,7 +9,15 @@ function ReportUser() {
     const fetchReports = async () => {
       try {
         const token = "b3bb874372df8a262c33a78b4de4841453b3ea52825a05f56f4dbb2f7863d989"
-        const response = await fetch('http://localhost:8080/tickets/read/reportsUsuari/all');
+        const response = await fetch('http://localhost:8080/tickets/read/reportsUsuari/all', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`, // Aquí es donde se incluye el token
+            },
+        }
+
+        );
         if (!response.ok) {
           throw new Error('Error fetching user reports');
         }
