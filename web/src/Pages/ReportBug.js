@@ -5,6 +5,7 @@ import "../RequestOrg.css"
 function ReportBug() {
   const [reports, setReports] = useState([]);
   const [activeButtons, setActiveButtons] = useState({});
+  const [filterState, setFilterState] = useState('To Do'); // Estado inicial del filtro global
 
   useEffect(() => {
     const fetchReports = async () => {
@@ -25,7 +26,7 @@ function ReportBug() {
 
         const initialActiveButtonsState = {};
         data.forEach((report) => {
-          initialActiveButtonsState[report.id] = 'button1'; // Inicialmente todos los botones están en 'To Do'
+          initialActiveButtonsState[report.id] = report.solucionat ? 'button2' : 'button1';
         });
         setActiveButtons(initialActiveButtonsState);
 
@@ -98,35 +99,28 @@ function ReportBug() {
     }
   };
 
-  const handleClick = async (button, id) => {
-    setActiveButtons(prevState => ({
-      ...prevState,
-      [id]: button
-    }));
-    if (button === 'button1') {
-      await handleToDo(id);
-    } else if (button === 'button2') {
-      await handleDone(id);
-    }
+  const handleFilterChange = (filter) => {
+    setFilterState(filter);
   };
 
-  const Filters = ({ id }) => (
+  const Filters = () => (
     <div className="filter">
       <button
-        className={activeButtons[id] === 'button1' ? 'active' : ''}
-        onClick={() => handleClick('button1', id)}
-      ><span>To Do</span>
+        className={filterState === 'To Do' ? 'active' : ''}
+        onClick={() => handleFilterChange('To Do')}
+      >
+        <span>To Do</span>
       </button>
       <button
-        className={activeButtons[id] === 'button2' ? 'active' : ''}
-        onClick={() => handleClick('button2', id)}
+        className={filterState === 'Done' ? 'active' : ''}
+        onClick={() => handleFilterChange('Done')}
       >
-      <span>Done</span>
+        <span>Done</span>
       </button>
     </div>
   );
 
-  const StateButtonUI = ({ id }) => (
+  const StateButtonUI = ({ id, state }) => (
     <button className="stateButton" onClick={(e) => {
       e.preventDefault(); // Evitar la redirección predeterminada
       if (activeButtons[id] === 'button1') {
@@ -147,27 +141,37 @@ function ReportBug() {
     </button>
   );
 
-  const Notification = ({ report }) => (
-    <div className="notification">
-      <div className="notiglow"></div>
-      <div className="notiborderglow"></div>
-      <div className="notititle">{report.titol}</div>
-      <div className="notibody">{report.report}</div>
-      <div>
-        <StateButtonUI id={report.id}/>
-      </div>
-    </div>
-  );
+  const Notification = ({ report }) => {
+    if ((filterState === 'To Do' && !report.solucionat) || (filterState === 'Done' && report.solucionat)) {
+      return (
+        <div className="notification">
+          <div className="notiglow"></div>
+          <div className="notiborderglow"></div>
+          <div className="notititle">{report.titol}</div>
+          <div className="notibody">{report.report}</div>
+          <div>
+            <StateButtonUI id={report.id} state={report.state}/>
+          </div>
+        </div>
+      );
+    } else {
+      return null;
+    }
+  };
 
   return (
     <div className="content">
       <h1>Bug Reports</h1>
-      {reports.map((report) => (
-        <div key={report.id}>
-          <Filters id={report.id}/>
-          <Notification report={report} />
-        </div>
-      ))}
+      <Filters />
+      <ul style={{ listStyleType: 'none' }}>
+        {reports.map((report) => (
+          <li key={report.id}>
+            <Link to={`${report.id}`} style={{ textDecoration: 'none' }}>
+              <Notification report={report} />
+            </Link>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
