@@ -5,6 +5,7 @@ import "../RequestOrg.css"
 
 function ReportBug() {
   const [reports, setReports] = useState([]);
+  const [activeButton, setActiveButton] = useState('button1');
 
   useEffect(() => {
     const fetchReports = async () => {
@@ -41,20 +42,48 @@ function ReportBug() {
     fetchReports();
   }, []);
 
+  const handleClick = (button) => {
+    setActiveButton(button);
+  };
+
+  const Filters = () => (
+    <div class="filter">
+      <button
+        className={activeButton === 'button1' ? 'active' : ''}
+        onClick={() => handleClick('button1')}
+      ><span>To Do</span>
+
+      </button>
+      <button
+        className={activeButton === 'button2' ? 'active' : ''}
+        onClick={() => handleClick('button2')}
+      >
+      <span>Done</span>
+      </button>
+    </div>
+  )
+
+  const StateButtonUI = () => (
+    <button class="stateButton"> 
+      <span>Done</span>
+    </button>
+  )
+
+
   const Notification = ({ reports }) => (
+
     <div className="notification">
       <div className="notiglow"></div>
       <div className="notiborderglow"></div>
       <div className="notititle">{reports.errorApp}</div>
       <div className="notibody">Usuario: {reports.username}</div>
-      <Switch></Switch>
+      <div>
+        <StateButtonUI/>
+      </div>
     </div>
   );
 
-  const filter = (event) => {
-  }
-
-
+/*
   const Filter = () => (
     <div className="filter">
       <label htmlFor="checkbox_toggle" className="checkbox">
@@ -67,7 +96,7 @@ function ReportBug() {
       </label>
     </div>
   );
-  
+*/
 
   const Switch = () => (
     <label class="toggle-switch">
@@ -83,7 +112,7 @@ function ReportBug() {
   return (
     <div className="content">
     <h1>Bug Reports</h1>
-    <Filter></Filter>
+    <Filters/>
     <ul>
       {reports.map((reports) => (
         <li key={reports.id}>
