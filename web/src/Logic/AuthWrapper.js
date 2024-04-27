@@ -28,6 +28,7 @@ export const AuthWrapper = () => {
       const data = (await response.text()).trim();
       const token = response.headers.get('Authorization');
 
+
       if (data === 'OK') {
         setUser({ name: username, isAuthenticated: true });
         setToken(token); // Set the token upon successful login
