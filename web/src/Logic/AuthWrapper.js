@@ -9,6 +9,7 @@ export const AuthData = () => useContext(AuthContext);
 
 export const AuthWrapper = () => {
   const [user, setUser] = useState({ name: "", isAuthenticated: false });
+  const [token, setToken] = useState(null)
 
   const login = async (username, password) => {
     try {
@@ -25,9 +26,11 @@ export const AuthWrapper = () => {
       }
 
       const data = (await response.text()).trim();
+      const token = response.headers.get('Authorization');
 
       if (data === 'OK') {
         setUser({ name: username, isAuthenticated: true });
+        setToken(token); // Set the token upon successful login
         return "success"; // Return success if login is successful
       } else {
         throw new Error(data); // Throw an error if login fails
@@ -43,7 +46,7 @@ export const AuthWrapper = () => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ user, login, logout, token }}>
       <>
         {user.isAuthenticated && <Header />} {/* Render Header if authenticated */}
         <RenderRoutes />
