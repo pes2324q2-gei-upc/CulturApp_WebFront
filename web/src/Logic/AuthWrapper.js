@@ -28,7 +28,6 @@ export const AuthWrapper = () => {
       const data = (await response.text()).trim();
       const token = response.headers.get('Authorization');
 
-
       if (data === 'OK') {
         setUser({ name: username, isAuthenticated: true });
         setToken(token); // Set the token upon successful login
@@ -50,7 +49,7 @@ export const AuthWrapper = () => {
     <AuthContext.Provider value={{ user, login, logout, token }}>
       <>
         {user.isAuthenticated && <Header />} {/* Render Header if authenticated */}
-        <RenderRoutes />
+        <RenderRoutes token = {token} />
       </>
     </AuthContext.Provider>
   );

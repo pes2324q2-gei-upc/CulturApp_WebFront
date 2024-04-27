@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import "../RequestOrg.css"
 
-function ReportBug() {
+function ReportBug( {token} ) {
   const [reports, setReports] = useState([]);
   const [activeButtons, setActiveButtons] = useState({});
   const [filterState, setFilterState] = useState('To Do'); // Estado inicial del filtro global
@@ -10,7 +10,6 @@ function ReportBug() {
   useEffect(() => {
     const fetchReports = async () => {
       try {
-        const token = "b3bb874372df8a262c33a78b4de4841453b3ea52825a05f56f4dbb2f7863d989"
         const response = await fetch('http://localhost:8080/tickets/reportsBug/all',{
           method: 'GET',
           headers: {
@@ -57,7 +56,6 @@ function ReportBug() {
 
   const handleToDo = async (id) => {
     try {
-      const token = 'b3bb874372df8a262c33a78b4de4841453b3ea52825a05f56f4dbb2f7863d989';
       const response = await fetch(`http://localhost:8080/tickets/reportsBug/${id}/solucionar`, {
         method: 'PUT',
         headers: {
@@ -79,7 +77,6 @@ function ReportBug() {
 
   const handleDone = async (id) => {
     try {
-      const token = 'b3bb874372df8a262c33a78b4de4841453b3ea52825a05f56f4dbb2f7863d989';
       const response = await fetch(`http://localhost:8080/tickets/reportsBug/${id}/nosolucionar`, {
         method: 'PUT',
         headers: {
