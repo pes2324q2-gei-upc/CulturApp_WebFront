@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-async function fetchBugReportById(id) {
+async function fetchBugReportById(id, token) {
   try {
-    const token = "b3bb874372df8a262c33a78b4de4841453b3ea52825a05f56f4dbb2f7863d989";
     const response = await fetch(`http://localhost:8080/tickets/reportsBug/${id}`, {
       method: 'GET',
       headers: {
@@ -24,13 +23,13 @@ async function fetchBugReportById(id) {
   }
 }
 
-const DetailBug = () => {
+const DetailBug = ( {token} ) => {
   const { id } = useParams();
   const [report, setReport] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
-      const reportData = await fetchBugReportById(id);
+      const reportData = await fetchBugReportById(id, token);
       setReport(reportData);
     };
 
