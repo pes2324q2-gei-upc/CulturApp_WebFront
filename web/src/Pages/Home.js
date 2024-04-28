@@ -4,7 +4,7 @@ import React from 'react';
 function Home() {
   return (
     <div className="content">
-      <h1 className="titlesmenusection">Home</h1>
+      <h1 className="titlesmenusection">Welcome</h1>
       <div className="content-parraf">
         <p>Welcome to our platform! We provide a comprehensive solution for managing reports submitted by users within our application. Our goal is to ensure a safe and enjoyable experience for all users while maintaining the integrity of our platform.</p>
         <p>Users have the ability to submit three types of reports:</p>

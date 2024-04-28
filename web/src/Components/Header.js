@@ -11,10 +11,10 @@ function Header() {
       <h2>CulturApp Administrator</h2>
       <nav>
         <ul>
-          <li><Link to="/" className={location.pathname === '/' ? 'active' : ''}>Home</Link></li>
-          <li><Link to="/report-bug" className={location.pathname === '/report-bug' ? 'active' : ''}>Report Bug</Link></li>
-          <li><Link to="/report-user" className={location.pathname === '/report-user' ? 'active' : ''}>Report User</Link></li>
-          <li><Link to="/request-org" className={location.pathname === '/request-org' ? 'active' : ''}>Request Org</Link></li>
+          <li><Link to="/" className={location.pathname === '/' ? 'active' : ''}>Welcome</Link></li>
+          <li><Link to="/report-bug" className={location.pathname === '/report-bug' ? 'active' : ''}>Bug reports</Link></li>
+          <li><Link to="/report-user" className={location.pathname === '/report-user' ? 'active' : ''}>User reports</Link></li>
+          <li><Link to="/request-org" className={location.pathname === '/request-org' ? 'active' : ''}>Organizer requests</Link></li>
         </ul>
       </nav>
     </div>
