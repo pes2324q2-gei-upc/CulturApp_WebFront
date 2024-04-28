@@ -143,7 +143,7 @@ const DetailUser = ({token}) => {
           </div>
         </div>
       )}
-      <Link to="/report-bug">
+      <Link to="/report-user">
         <button className="backbutton">Back</button>
       </Link>
     </div>

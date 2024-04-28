@@ -19,7 +19,7 @@
     text-align: center;
     font-weight: 900;
     font-size: 30px;
-    color: rgb(255, 183, 0);
+    color:  #ff6e15;
   }
   
   .form {
@@ -56,7 +56,7 @@
     display: block;
     width: 100%;
     font-weight: bold;
-    background: linear-gradient(45deg, rgb(255, 183, 0) 0%, rgb(255, 136, 0) 100%);
+    background:  #ff6e15;
     color: white;
     padding-block: 15px;
     margin: 20px auto;
