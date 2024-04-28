@@ -1,11 +1,99 @@
+/*------------GLBOAL------------*/
 
 .content {
     flex: 1;
     padding: 20px;
     margin-left: 290px;
-    width: 100%;
     height: 100%;
 }
+
+.line {
+    margin-left: 450px;
+    width: 50%;
+    border-top: 1px solid black; /* Estilo de la línea */
+    
+  }
+
+/*------------GLBOAL END------------*/
+
+/*------------DETAIL BUG------------*/
+
+.detailBugtitle{
+    text-align: center;
+}
+
+.detailBugid {
+    text-align: center;
+}
+
+.detailBugcontent {
+    margin-left: 450px;
+}
+
+.detailBugsection {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.atribute {
+    color: #ff6e15;
+    font-size: 20px;
+}
+
+.value {
+    font-size: 20px;
+    width: 66%;
+    text-align: justify;
+}
+
+.detailbutton {
+    text-align: center;
+    padding: 20px;
+}
+
+.detailbutton button {
+    background-color: black; /* Color de fondo predeterminado */
+    color: white; /* Color del texto predeterminado */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.4s cubic-bezier(0.3, 1, 0.8, 1);
+}
+
+.detailbutton button {
+    background-color: black; /* Color de fondo predeterminado */
+    color: white; /* Color del texto predeterminado */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.4s cubic-bezier(0.3, 1, 0.8, 1);
+}
+
+.detailbutton button:hover {
+    background-color: #ff6e15; /* Cambia el color de fondo al pasar el ratón sobre el botón */
+}
+
+.backbutton {
+    margin-left: 200px;
+    background-color: black;
+}
+
+.backbutton:hover {
+    background-color: gray;
+}
+
+/*------------DETAIL BUG END------------*/
+
+/*------------HOME------------*/
+
+.content-parraf {
+    text-align: justify;
+    justify-content: center;
+    width: 60%;
+}
+/*------------HOME END------------*/
 
 .container-menu {
     display: flex;

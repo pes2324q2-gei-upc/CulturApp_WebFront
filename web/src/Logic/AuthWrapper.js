@@ -49,7 +49,7 @@ export const AuthWrapper = () => {
     <AuthContext.Provider value={{ user, login, logout, token }}>
       <>
         {user.isAuthenticated && <Header />} {/* Render Header if authenticated */}
-        <RenderRoutes />
+        <RenderRoutes token = {token} />
       </>
     </AuthContext.Provider>
   );

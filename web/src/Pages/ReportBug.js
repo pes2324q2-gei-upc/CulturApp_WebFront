@@ -2,20 +2,32 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import "../RequestOrg.css"
 
-
-function ReportBug() {
+function ReportBug( {token} ) {
   const [reports, setReports] = useState([]);
-  const [activeButton, setActiveButton] = useState('button1');
+  const [activeButtons, setActiveButtons] = useState({});
+  const [filterState, setFilterState] = useState('To Do'); // Estado inicial del filtro global
 
   useEffect(() => {
     const fetchReports = async () => {
       try {
-        const response = await fetch('http://localhost:8080/tickets/read/reportsBug/all');
+        const response = await fetch('http://localhost:8080/tickets/reportsBug/all',{
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+          },
+        });
         if (!response.ok) {
           throw new Error('Error fetching reports');
         }
         const data = await response.json();
         setReports(data);
+
+        const initialActiveButtonsState = {};
+        data.forEach((report) => {
+          initialActiveButtonsState[report.id] = report.solucionat ? 'button2' : 'button1';
+        });
+        setActiveButtons(initialActiveButtonsState);
 
         const updatedReports = await Promise.all(
           data.map(async (report) => {
@@ -42,87 +54,129 @@ function ReportBug() {
     fetchReports();
   }, []);
 
-  const handleClick = (button) => {
-    setActiveButton(button);
+  const handleToDo = async (id) => {
+    try {
+      const response = await fetch(`http://localhost:8080/tickets/reportsBug/${id}/solucionar`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+      });
+  
+      if (!response.ok) {
+        throw new Error('Error setting report to To Do');
+      }
+  
+      const data = await response.text();
+      console.log(data); // Manejar la respuesta de la API según sea necesario
+    } catch (error) {
+      console.error('Error setting report to To Do:', error);
+    }
+  };
+
+  const handleDone = async (id) => {
+    try {
+      const response = await fetch(`http://localhost:8080/tickets/reportsBug/${id}/nosolucionar`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+      });
+  
+      if (!response.ok) {
+        throw new Error('Error setting report to Done');
+      }
+  
+      const data = await response.text();
+      console.log(data); // Manejar la respuesta de la API según sea necesario
+    } catch (error) {
+      console.error('Error setting report to Done:', error);
+    }
+  };
+
+  const handleFilterChange = (filter) => {
+    setFilterState(filter);
   };
 
   const Filters = () => (
-    <div class="filter">
-      <button
-        className={activeButton === 'button1' ? 'active' : ''}
-        onClick={() => handleClick('button1')}
-      ><span>To Do</span>
-
-      </button>
-      <button
-        className={activeButton === 'button2' ? 'active' : ''}
-        onClick={() => handleClick('button2')}
-      >
-      <span>Done</span>
-      </button>
-    </div>
-  )
-
-  const StateButtonUI = () => (
-    <button class="stateButton"> 
-      <span>Done</span>
-    </button>
-  )
-
-
-  const Notification = ({ reports }) => (
-
-    <div className="notification">
-      <div className="notiglow"></div>
-      <div className="notiborderglow"></div>
-      <div className="notititle">{reports.errorApp}</div>
-      <div className="notibody">Usuario: {reports.username}</div>
-      <div>
-        <StateButtonUI/>
-      </div>
-    </div>
-  );
-
-/*
-  const Filter = () => (
     <div className="filter">
-      <label htmlFor="checkbox_toggle" className="checkbox">
-        <input id="checkbox_toggle" type="checkbox" className="check" />
-        <div className="slide">
-          <span className="toggle"></span>
-          <span className="text">Day</span>
-          <span className="text">Night</span>
-        </div>
-      </label>
+      <button
+        className={filterState === 'To Do' ? 'active' : ''}
+        onClick={() => handleFilterChange('To Do')}
+      >
+        <span>To Do</span>
+      </button>
+      <button
+        className={filterState === 'Done' ? 'active' : ''}
+        onClick={() => handleFilterChange('Done')}
+      >
+        <span>Done</span>
+      </button>
     </div>
   );
-*/
 
-  const Switch = () => (
-    <label class="toggle-switch">
-      <input type="checkbox" />
-      <div class="toggle-switch-background">
-        <div class="toggle-switch-handle"></div>
-      </div>
-    </label>
-  )
+  const StateButtonUI = ({ id, state }) => (
+    <button className="stateButton" onClick={(e) => {
+      e.preventDefault(); // Evitar la redirección predeterminada
+      if (activeButtons[id] === 'button1') {
+        handleToDo(id);
+        setActiveButtons(prevState => ({
+          ...prevState,
+          [id]: 'button2' // Cambiar el estado a 'Done' después de hacer clic en 'To Do'
+        }));
+      } else if (activeButtons[id] === 'button2') {
+        handleDone(id);
+        setActiveButtons(prevState => ({
+          ...prevState,
+          [id]: 'button1' // Cambiar el estado a 'To Do' después de hacer clic en 'Done'
+        }));
+      }
+    }}> 
+      <span>{activeButtons[id] === 'button1' ? 'To Do' : 'Done'}</span>
+    </button>
+  );
 
-
+  const Notification = ({ report }) => {
+    const MAX_LENGTH = 120;
+    const truncateText = (text) => {
+      if (text.length > MAX_LENGTH) {
+          return text.substring(0, MAX_LENGTH) + '...';
+      }
+      return text;
+    };
+    if ((filterState === 'To Do' && !report.solucionat) || (filterState === 'Done' && report.solucionat)) {
+      return (
+        <div className="notification">
+          <div className="notiglow"></div>
+          <div className="notiborderglow"></div>
+          <div className="notititle">{report.titol}</div>
+          <div className="notibody">{truncateText(report.report)}</div>
+          <div>
+            <StateButtonUI id={report.id} state={report.state}/>
+          </div>
+        </div>
+      );
+    } else {
+      return null;
+    }
+  };
 
   return (
     <div className="content">
-    <h1>Bug Reports</h1>
-    <Filters/>
-    <ul>
-      {reports.map((reports) => (
-        <li key={reports.id}>
-          <Link to={`${reports.id}`} style={{ textDecoration: 'none' }}>
-            <Notification reports={reports} />
-          </Link>
-        </li>
-      ))}
-    </ul>
-  </div>
+      <h1>Bug Reports</h1>
+      <Filters />
+      <ul style={{ listStyleType: 'none' }}>
+        {reports.map((report) => (
+          <li key={report.id}>
+            <Link to={`${report.id}`} style={{ textDecoration: 'none' }}>
+              <Notification report={report} />
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
 
