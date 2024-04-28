@@ -1,3 +1,5 @@
+/*------------GLBOAL------------*/
+
 .content {
     flex: 1;
     padding: 20px;
@@ -5,11 +7,64 @@
     height: 100%;
 }
 
+.line {
+    margin-left: 450px;
+    width: 42%;
+    border-top: 1px solid black; /* Estilo de la línea */
+    
+  }
+
+/*------------GLBOAL END------------*/
+
+/*------------DETAIL BUG------------*/
+
+.detailBugtitle{
+    text-align: center;
+}
+
+.detailBugid {
+    text-align: center;
+}
+
+.detailBugcontent {
+    margin-left: 450px;
+}
+
+.detailBugsection {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.atribute {
+    color: #ff6e15;
+    font-size: 20px;
+}
+
+.value {
+    font-size: 20px;
+    width: 59%;
+    text-align: justify;
+}
+
+.detailbutton {
+    text-align: center;
+    padding: 20px;
+}
+
+.backbutton {
+    margin-left: 200px;
+}
+
+/*------------DETAIL BUG END------------*/
+
+/*------------HOME------------*/
+
 .content-parraf {
     text-align: justify;
     justify-content: center;
     width: 60%;
 }
+/*------------HOME END------------*/
 
 .container-menu {
     display: flex;

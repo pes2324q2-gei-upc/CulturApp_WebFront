@@ -97,27 +97,41 @@ const DetailBug = ({ token }) => {
 
   return (
     <div className="content">
-      <h1>Detail Bug for ID</h1>
-      <h2>{id}</h2>
+      <h1 className="detailBugtitle">Detail Bug</h1>
+      <h2 className="detailBugid">ID: {id}</h2>
       {report && (
         <div>
-          <h3>About the bug</h3>
-          <p>Title: {report.titol}</p>
-          <p>Description: {report.report}</p>
-          <p>Fecha: {formatDate(report.data_report).day}</p>
-          <p>Hora: {formatDate(report.data_report).time}</p>
-          <h3>About the user</h3>
-          <p>User: {report.username}</p>
-          <p>Mail: </p>
-          {report.solucionat ? (
-            <button onClick={handleToDo}>Done</button>
-          ) : (
-            <button onClick={handleDone}>To Do</button>
-          )}
+          <h3 className="detailBugsection">About the bug</h3>
+          <hr className="line" />
+          <div className="detailBugcontent">
+            <p className="atribute">Title</p>
+            <p className="value">{report.titol}</p>
+            <p className="atribute">Description</p>
+            <p className="value">{report.report}</p>
+            <p className="atribute">Date</p>
+            <p className="value">{formatDate(report.data_report).day}</p>
+            <p className="atribute">Time</p>
+            <p className="value">{formatDate(report.data_report).time}</p>
+          </div>
+          <h3 className="detailBugsection">About the user</h3>
+          <hr className="line" />
+          <div className="detailBugcontent">
+            <p className="atribute">User</p>
+            <p className="value">{report.username}</p>
+            <p className="atribute">Mail</p>
+            <p className="value"></p>
+          </div>
+          <div className="detailbutton">
+            {report.solucionat ? (
+              <button onClick={handleToDo}>Done</button>
+            ) : (
+              <button onClick={handleDone}>To Do</button>
+            )}
+          </div>
         </div>
       )}
       <Link to="/report-bug">
-        <button>Back</button>
+        <button className="backbutton">Back</button>
       </Link>
     </div>
   );
