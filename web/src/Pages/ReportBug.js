@@ -28,24 +28,6 @@ function ReportBug( {token} ) {
           initialActiveButtonsState[report.id] = report.solucionat ? 'button2' : 'button1';
         });
         setActiveButtons(initialActiveButtonsState);
-
-        const updatedReports = await Promise.all(
-          data.map(async (report) => {
-            try {
-              const usernameResponse = await fetch(`http://localhost:8080/users/${report.user}/username`);
-              if (!usernameResponse.ok) {
-                throw new Error('Error fetching username');
-              }
-              const usernameData = await usernameResponse.json();
-              return { ...report, username: usernameData };
-            } catch (error) {
-              console.error('Error fetching username:', error);
-              return { ...report, username: 'Usuario desconocido' };
-            }
-          })
-        );
-
-        setReports(updatedReports);
       } catch (error) {
         console.error('Error fetching reports:', error);
       }
