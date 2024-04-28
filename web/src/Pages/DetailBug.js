@@ -15,8 +15,17 @@ async function fetchBugReportById(id, token) {
       throw new Error('Error fetching bug report');
     }
 
-    const data = await response.json();
-    return data;
+    const reportData = await response.json();
+
+    // Obtener el nombre de usuario
+    const usernameResponse = await fetch(`http://localhost:8080/users/${reportData.user}/username`);
+    if (!usernameResponse.ok) {
+      throw new Error('Error fetching username');
+    }
+    const usernameData = await usernameResponse.json();
+    reportData.username = usernameData;
+
+    return reportData;
   } catch (error) {
     console.error('Error fetching bug report:', error);
     return null;
@@ -78,14 +87,28 @@ const DetailBug = ({ token }) => {
     }
   };
 
+  // Función para formatear la fecha
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const day = date.toLocaleDateString('es-ES', { day: 'numeric', month: 'numeric', year: 'numeric' });
+    const time = date.toLocaleTimeString('es-ES');
+    return { day, time };
+  };
+
   return (
     <div className="content">
-      <h1>Detail Bug for ID: {id}</h1>
+      <h1>Detail Bug for ID</h1>
+      <h2>{id}</h2>
       {report && (
         <div>
-          <p>Fecha: {report.data_report}</p>
+          <h3>About the bug</h3>
+          <p>Title: {report.titol}</p>
           <p>Description: {report.report}</p>
-          {/* Botón para cambiar el estado */}
+          <p>Fecha: {formatDate(report.data_report).day}</p>
+          <p>Hora: {formatDate(report.data_report).time}</p>
+          <h3>About the user</h3>
+          <p>User: {report.username}</p>
+          <p>Mail: </p>
           {report.solucionat ? (
             <button onClick={handleToDo}>Done</button>
           ) : (
