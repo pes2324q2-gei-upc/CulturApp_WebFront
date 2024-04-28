@@ -2,41 +2,29 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 
-function RequestOrg() {
+function RequestOrg( {token} ) {
   const [requests, setRequests] = useState([]);
 
   useEffect(() => {
     const fetchRequests = async () => {
       try {
-        const response = await fetch('http://localhost:8080/tickets/read/solicitudsOrganitzador/otorgades');
+        const response = await fetch('http://localhost:8080/tickets//solicitudsOrganitzador/all', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+          },
+        });
         if (!response.ok) {
           throw new Error('Error fetching organizer requests');
         }
         const data = await response.json();
+        setRequests(data);
 
-        // Fetch user name and activity info for each request
-        const requestsWithUserInfo = await Promise.all(data.map(async (request) => {
-          const userResponse = await fetch(`http://localhost:8080/users/${request.userSolicitant}/username`);
-          if (!userResponse.ok) {
-            throw new Error('Error fetching user name');
-          }
-          const userName = await userResponse.json();
-
-          const activityResponse = await fetch(`http://localhost:8080/activitats/read/${request.idActivitat}`);
-          if (!activityResponse.ok) {
-            throw new Error('Error fetching activity info');
-          }
-          const activityInfo = await activityResponse.json();
-
-          return { ...request, userName, activityInfo };
-        }));
-
-        setRequests(requestsWithUserInfo);
       } catch (error) {
         console.error('Error fetching organizer requests:', error);
       }
     };
-
     fetchRequests();
   }, []);
 
@@ -47,8 +35,7 @@ function RequestOrg() {
         {requests.map((requests) => (
           <li key={requests.id}>
             <Link to={`${requests.id}`}>
-              <h3>{requests.errorApp}</h3>
-              <p>Usuario: {requests.username}</p>
+              <h3>{requests.titol}</h3>
             </Link>
           </li>
         ))}
