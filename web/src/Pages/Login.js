@@ -36,7 +36,7 @@ export const Login = () => {
           type="text"
           name="username"
           id="username"
-          placeholder="Joan"
+          placeholder="Username"
           value={formData.username}
           onChange={handleInputChange}
         />

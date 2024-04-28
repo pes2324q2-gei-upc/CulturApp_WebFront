@@ -147,7 +147,7 @@ function ReportBug( {token} ) {
 
   return (
     <div className="content">
-      <h1>Bug Reports</h1>
+      <h1 className="titlesmenusection">Bug reports</h1>
       <Filters />
       <ul style={{ listStyleType: 'none' }}>
         {reports.map((report) => (

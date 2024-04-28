@@ -33,7 +33,7 @@ function ReportUser({token}) {
 
   return (
     <div className="content">
-      <h1>User Report</h1>
+      <h1 className="titlesmenusection">User reports</h1>
       <ul>
         {reports.map((report) => (
           <li key={report.id}>

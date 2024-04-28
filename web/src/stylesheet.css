@@ -12,9 +12,17 @@
     width: 50%;
     border-top: 1px solid black; /* Estilo de la línea */
     
-  }
+}
+
+.titlesmenusection {
+    text-align: center;
+}
 
 /*------------GLBOAL END------------*/
+
+/*------------LIST BUG END------------*/
+
+/*------------LIST BUG END------------*/
 
 /*------------DETAIL BUG------------*/
 
@@ -114,7 +122,23 @@
     text-align: justify;
     justify-content: center;
     width: 60%;
+    margin-left: 350px;
+    margin-top: 80px;
+    font-size: 22px;
 }
+
+.signature {
+    margin-left: 1100px;
+    margin-top: 70px;
+}
+
+.great-vibes-regular {
+    font-family: "Great Vibes", cursive;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 2.5rem; /* Tamaño de letra más grande */
+}
+
 /*------------HOME END------------*/
 
 .container-menu {
