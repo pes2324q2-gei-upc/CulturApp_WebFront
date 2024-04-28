@@ -2,13 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 
-function ReportUser() {
+function ReportUser({token}) {
   const [reports, setReports] = useState([]);
 
   useEffect(() => {
     const fetchReports = async () => {
       try {
-        const token = "b3bb874372df8a262c33a78b4de4841453b3ea52825a05f56f4dbb2f7863d989"
         const response = await fetch('http://localhost:8080/tickets/reportsUsuaris/all', {
           method: 'GET',
           headers: {
@@ -22,22 +21,8 @@ function ReportUser() {
           throw new Error('Error fetching user reports');
         }
         const data = await response.json();
+        setReports(data);
 
-        // Map through each report and fetch additional user information
-        const enhancedReports = await Promise.all(data.map(async (report) => {
-          const userReportedResponse = await fetch(`http://localhost:8080/users/${report.usuariReportat}/username`);
-          const userReportedData = await userReportedResponse.json();
-          const userReportResponse = await fetch(`http://localhost:8080/users/${report.user}/username`);
-          const userReportData = await userReportResponse.json();
-
-          return {
-            ...report,
-            userReportedUsername: userReportedData,
-            userReportUsername: userReportData,
-          };
-        }));
-
-        setReports(enhancedReports);
       } catch (error) {
         console.error('Error fetching user reports:', error);
       }
@@ -53,10 +38,8 @@ function ReportUser() {
         {reports.map((report) => (
           <li key={report.id}>
             <Link to={`${report.id}`}>
-              <h3> {report.motiuReport} </h3>
-              <p>User Reported: {report.userReportedUsername}</p>
-              <p>{report.description}</p>
-              <p>Reported By: {report.userReportUsername}</p>
+              <h3> {report.titol} </h3>
+              <p> {report.report} </p>
             </Link>
           </li>
         ))}
