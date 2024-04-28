@@ -9,7 +9,7 @@
 
 .line {
     margin-left: 450px;
-    width: 42%;
+    width: 50%;
     border-top: 1px solid black; /* Estilo de la línea */
     
   }
@@ -42,7 +42,7 @@
 
 .value {
     font-size: 20px;
-    width: 59%;
+    width: 66%;
     text-align: justify;
 }
 
@@ -51,8 +51,37 @@
     padding: 20px;
 }
 
+.detailbutton button {
+    background-color: black; /* Color de fondo predeterminado */
+    color: white; /* Color del texto predeterminado */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.4s cubic-bezier(0.3, 1, 0.8, 1);
+}
+
+.detailbutton button {
+    background-color: black; /* Color de fondo predeterminado */
+    color: white; /* Color del texto predeterminado */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.4s cubic-bezier(0.3, 1, 0.8, 1);
+}
+
+.detailbutton button:hover {
+    background-color: #ff6e15; /* Cambia el color de fondo al pasar el ratón sobre el botón */
+}
+
 .backbutton {
     margin-left: 200px;
+    background-color: black;
+}
+
+.backbutton:hover {
+    background-color: gray;
 }
 
 /*------------DETAIL BUG END------------*/

@@ -18,12 +18,13 @@ async function fetchBugReportById(id, token) {
     const reportData = await response.json();
 
     // Obtener el nombre de usuario
-    const usernameResponse = await fetch(`http://localhost:8080/users/${reportData.user}/username`);
+    const usernameResponse = await fetch(`http://localhost:8080/users/${reportData.user}`);
     if (!usernameResponse.ok) {
       throw new Error('Error fetching username');
     }
     const usernameData = await usernameResponse.json();
-    reportData.username = usernameData;
+    reportData.username = usernameData.username;
+    reportData.mail = usernameData.email;
 
     return reportData;
   } catch (error) {
@@ -119,7 +120,7 @@ const DetailBug = ({ token }) => {
             <p className="atribute">User</p>
             <p className="value">{report.username}</p>
             <p className="atribute">Mail</p>
-            <p className="value"></p>
+            <p className="value">{report.mail}</p>
           </div>
           <div className="detailbutton">
             {report.solucionat ? (
