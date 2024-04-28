@@ -139,13 +139,20 @@ function ReportBug( {token} ) {
   );
 
   const Notification = ({ report }) => {
+    const MAX_LENGTH = 120;
+    const truncateText = (text) => {
+      if (text.length > MAX_LENGTH) {
+          return text.substring(0, MAX_LENGTH) + '...';
+      }
+      return text;
+    };
     if ((filterState === 'To Do' && !report.solucionat) || (filterState === 'Done' && report.solucionat)) {
       return (
         <div className="notification">
           <div className="notiglow"></div>
           <div className="notiborderglow"></div>
           <div className="notititle">{report.titol}</div>
-          <div className="notibody">{report.report}</div>
+          <div className="notibody">{truncateText(report.report)}</div>
           <div>
             <StateButtonUI id={report.id} state={report.state}/>
           </div>
