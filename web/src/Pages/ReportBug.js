@@ -128,7 +128,7 @@ function ReportBug( {token} ) {
       }
       return text;
     };
-    if ((filterState === 'To Do' && !report.solucionat) || (filterState === 'Done' && report.solucionat)) {
+    if ((filterState === 'Done' && !report.solucionat) || (filterState === 'To Do' && report.solucionat)) {
       return (
         <div className="notification">
           <div className="notiglow"></div>
