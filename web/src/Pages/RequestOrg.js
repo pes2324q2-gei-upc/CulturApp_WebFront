@@ -5,7 +5,7 @@ import "../RequestOrg.css"
 function RequestOrg( {token} ) {
   const [requests, setRequests] = useState([]);
   const [activeButtons, setActiveButtons] = useState({});
-  const [filterState, setFilterState] = useState('To Do');
+  const [filterState, setFilterState] = useState('Pending');
 
   useEffect(() => {
     const fetchRequests = async () => {
@@ -41,13 +41,13 @@ function RequestOrg( {token} ) {
       });
   
       if (!response.ok) {
-        throw new Error('Error setting report to To Do');
+        throw new Error('Error setting report to refuse');
       }
   
       const data = await response.text();
       console.log(data); // Manejar la respuesta de la API según sea necesario
     } catch (error) {
-      console.error('Error setting report to To Do:', error);
+      console.error('Error setting report to refuse:', error);
     }
   };
 
@@ -62,13 +62,13 @@ function RequestOrg( {token} ) {
       });
   
       if (!response.ok) {
-        throw new Error('Error setting report to Done');
+        throw new Error('Error setting report to Resolved');
       }
   
       const data = await response.text();
       console.log(data); // Manejar la respuesta de la API según sea necesario
     } catch (error) {
-      console.error('Error setting report to Done:', error);
+      console.error('Error setting report to Resolved:', error);
     }
   };
 
@@ -79,31 +79,33 @@ function RequestOrg( {token} ) {
   const Filters = () => (
     <div className="filter">
       <button
-        className={filterState === 'To Do' ? 'active' : ''}
-        onClick={() => handleFilterChange('To Do')}
+        className={filterState === 'Pending' ? 'active' : ''}
+        onClick={() => handleFilterChange('Pending')}
       >
-        <span>To Do</span>
+        <span>Pending</span>
       </button>
       <button
-        className={filterState === 'Done' ? 'active' : ''}
-        onClick={() => handleFilterChange('Done')}
+        className={filterState === 'Resolved' ? 'active' : ''}
+        onClick={() => handleFilterChange('Resolved')}
       >
-        <span>Done</span>
+        <span>Resolved</span>
       </button>
     </div>
   );
 
-  const StateButtonUI = () => (
+  const StateButtonUI = ({id, request}) => (
     <div>
       <button className="acceptButton" onClick={(e) => {
         e.preventDefault(); // Evitar la redirección predeterminada
-        handleAccept();
-      }}> 
+        handleAccept(id);
+        request.pendent = false;
+      }}> <span>Accept</span>
       </button>
       <button className="refuseButton" onClick={(e) => {
         e.preventDefault(); // Evitar la redirección predeterminada
-        handleRefuse();
-      }}> 
+        handleRefuse(id);
+        request.pendent = false;
+      }}> <span>Refuse</span>
       </button>
     </div>
     
@@ -118,7 +120,7 @@ function RequestOrg( {token} ) {
       return text;
     };
     
-    if (filterState === 'Done') {
+    if ((filterState === 'Pending' && report.pendent)) {
       return (
         <div className="notification">
           <div className="notiglow"></div>
@@ -126,8 +128,17 @@ function RequestOrg( {token} ) {
           <div className="notititle">{report.titol}</div>
           <div className="notibody">{truncateText(report.report)}</div>
           <div>
-            <StateButtonUI/>
+            <StateButtonUI id={report.id} request={report}/>
           </div>
+        </div>
+      );
+    } else if(filterState === 'Resolved' && !report.pendent) {
+      return (
+        <div className="notification">
+          <div className="notiglow"></div>
+          <div className="notiborderglow"></div>
+          <div className="notititle">{report.titol}</div>
+          <div className="notibody">{truncateText(report.report)}</div>
         </div>
       );
     } else {

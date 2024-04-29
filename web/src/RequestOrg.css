@@ -322,7 +322,7 @@
     font-family: inherit;
     font-size: inherit;
     position: absolute; /* Change position to absolute */
-    right: 10%; /* Align to the maximum right */
+    right: 15%; /* Align to the maximum right */
     top: 20%; /* Optionally, adjust the top position */
     display: inline-block;
     letter-spacing: 0.05rem;
@@ -355,7 +355,7 @@
    
    .acceptButton::before {
     content: "";
-    background: #000;
+    background: #ff6e15;
     width: 120%;
     left: -10%;
     transform: skew(30deg);
@@ -409,7 +409,7 @@
    
    .refuseButton::before {
     content: "";
-    background: #000;
+    background: #ff6e15;
     width: 120%;
     left: -10%;
     transform: skew(30deg);

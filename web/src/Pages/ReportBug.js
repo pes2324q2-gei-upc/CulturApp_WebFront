@@ -99,17 +99,19 @@ function ReportBug( {token} ) {
     </div>
   );
 
-  const StateButtonUI = ({ id, state }) => (
+  const StateButtonUI = ({ id, report }) => (
     <button className="stateButton" onClick={(e) => {
       e.preventDefault(); // Evitar la redirección predeterminada
       if (activeButtons[id] === 'button1') {
         handleToDo(id);
+        report.solucionat = true;
         setActiveButtons(prevState => ({
           ...prevState,
           [id]: 'button2' // Cambiar el estado a 'Done' después de hacer clic en 'To Do'
         }));
       } else if (activeButtons[id] === 'button2') {
         handleDone(id);
+        report.solucionat = false;
         setActiveButtons(prevState => ({
           ...prevState,
           [id]: 'button1' // Cambiar el estado a 'To Do' después de hacer clic en 'Done'
@@ -136,7 +138,7 @@ function ReportBug( {token} ) {
           <div className="notititle">{report.titol}</div>
           <div className="notibody">{truncateText(report.report)}</div>
           <div>
-            <StateButtonUI id={report.id} state={report.state}/>
+            <StateButtonUI id={report.id} report={report}/>
           </div>
         </div>
       );
