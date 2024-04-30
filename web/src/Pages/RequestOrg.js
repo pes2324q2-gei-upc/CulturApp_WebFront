@@ -21,6 +21,7 @@ function RequestOrg( {token} ) {
           throw new Error('Error fetching organizer requests');
         }
         const data = await response.json();
+        console.log(data);
         setRequests(data);
 
       } catch (error) {
@@ -126,7 +127,7 @@ function RequestOrg( {token} ) {
           <div className="notiglow"></div>
           <div className="notiborderglow"></div>
           <div className="notititle">{report.titol}</div>
-          <div className="notibody">{truncateText(report.report)}</div>
+          <div className="notibody">{truncateText(report.motiu)}</div>
           <div>
             <StateButtonUI id={report.id} request={report}/>
           </div>
@@ -138,7 +139,7 @@ function RequestOrg( {token} ) {
           <div className="notiglow"></div>
           <div className="notiborderglow"></div>
           <div className="notititle">{report.titol}</div>
-          <div className="notibody">{truncateText(report.report)}</div>
+          <div className="notibody">{report.motiu}</div>
         </div>
       );
     } else {
@@ -148,7 +149,7 @@ function RequestOrg( {token} ) {
 
   return (
     <div className="content">
-      <h1 className="titlesmenusection">Organizator request</h1>
+      <h1 className="titlesmenusection">Organizer request</h1>
       <Filters />
       <ul style={{ listStyleType: 'none' }}>
         {requests.map((report) => (
