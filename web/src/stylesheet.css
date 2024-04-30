@@ -120,17 +120,16 @@
 
 .content-parraf {
     text-align: justify;
-    justify-content: center;
     width: 60%;
-    margin-left: 350px;
-    margin-top: 80px;
+    margin: 5% auto;
     font-size: 22px;
 }
 
 .signature {
-    margin-left: 1100px;
-    margin-top: 70px;
+    margin: 70px auto; /* Ajusta el margen superior y el margen automático horizontal */
+    text-align: center; /* Asegura que el texto esté centrado horizontalmente */
 }
+
 
 .great-vibes-regular {
     font-family: "Great Vibes", cursive;
