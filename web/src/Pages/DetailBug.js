@@ -18,7 +18,13 @@ async function fetchBugReportById(id, token) {
     const reportData = await response.json();
 
     // Obtener el nombre de usuario
-    const usernameResponse = await fetch(`http://localhost:8080/users/${reportData.user}`);
+    const usernameResponse = await fetch(`http://localhost:8080/users/${reportData.user}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+    });
     if (!usernameResponse.ok) {
       throw new Error('Error fetching username');
     }
