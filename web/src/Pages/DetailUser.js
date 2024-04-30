@@ -33,7 +33,13 @@ async function fetchUserReportById(id, token) {
     reportData.mail = usernameData.email;
 
     // Obtener el nombre de usuario
-    const usernamereportedResponse = await fetch(`http://localhost:8080/users/${reportData.user}`);
+    const usernamereportedResponse = await fetch(`http://localhost:8080/users/${reportData.usuariReportat}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+    });
     if (!usernamereportedResponse.ok) {
       throw new Error('Error fetching username');
     }
