@@ -322,7 +322,7 @@
     font-family: inherit;
     font-size: inherit;
     position: absolute; /* Change position to absolute */
-    right: 15%; /* Align to the maximum right */
+    right: 20%; /* Align to the maximum right */
     top: 20%; /* Optionally, adjust the top position */
     display: inline-block;
     letter-spacing: 0.05rem;
