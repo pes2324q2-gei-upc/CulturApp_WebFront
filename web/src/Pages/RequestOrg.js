@@ -106,7 +106,7 @@ function RequestOrg( {token} ) {
         e.preventDefault(); // Evitar la redirección predeterminada
         handleRefuse(id);
         request.pendent = false;
-      }}> <span>Refuse</span>
+      }}> <span>Decline</span>
       </button>
     </div>
     

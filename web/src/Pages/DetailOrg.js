@@ -32,6 +32,25 @@ async function fetchRequestById(id, token) {
     reportData.username = usernameData.username;
     reportData.mail = usernameData.email;
 
+    const actividadesResponse = await fetch(`http://localhost:8080/activitats/read/${reportData.idActivitat}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+    });
+    if (!actividadesResponse.ok) {
+      throw new Error('Error fetching username');
+    }
+    const activitatData = await actividadesResponse.json();
+    reportData.actdir = activitatData.adre_a;
+    reportData.actdatini = activitatData.data_inici;
+    reportData.actdatfi = activitatData.data_fi;
+    reportData.acttitol = activitatData.denominaci;
+    reportData.actdescr = activitatData.descripcio;
+
+    console.log(reportData);
+
     return reportData;
   } catch (error) {
     console.error('Error fetching bug report:', error);
@@ -132,6 +151,20 @@ const DetailOrg = ({token}) => {
             <p className="value">{report.username}</p>
             <p className="atribute">Mail</p>
             <p className="value">{report.mail}</p>
+          </div>
+          <h3 className="detailBugsection">About the activity</h3>
+          <hr className="line" />
+          <div className="detailBugcontent">
+            <p className="atribute">Title</p>
+            <p className="value">{report.acttitol}</p>
+            <p className="atribute">Description</p>
+            <p className="value">{report.actdescr}</p>
+            <p className="atribute">Initial date</p>
+            <p className="value">{formatDate(report.actdatini).day}   {formatDate(report.actdatini).time}</p>
+            <p className="atribute">Final date</p>
+            <p className="value">{formatDate(report.actdatfi).day}  {formatDate(report.actdatfi).time}</p>
+            <p className="atribute">Direction</p>
+            <p className="value">{report.actdir}</p>    
           </div>
           {report.pendent && (
             <div className="actionbutton">
