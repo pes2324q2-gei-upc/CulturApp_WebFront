@@ -149,7 +149,7 @@ function RequestOrg( {token} ) {
 
   return (
     <div className="content">
-      <h1 className="titlesmenusection">Organizer request</h1>
+      <h1 className="titlesmenusection">Organizer requests</h1>
       <Filters />
       <ul style={{ listStyleType: 'none' }}>
         {requests.map((report) => (
