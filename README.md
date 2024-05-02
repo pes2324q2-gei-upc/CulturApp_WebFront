@@ -14,7 +14,7 @@ Our team carefully reviews each report received to assess the situation and take
 We encourage our administrators to use the reporting feature responsibly and to help us maintain a welcoming and inclusive community for everyone. Together, we can work towards creating a positive and enjoyable environment for all users to interact and engage with our platform.
 
 ### Installation
-To get started, you'll need to have Node.js installed on your machine. We recommend using Node Version Manager (nvm) to manage your Node.js versions. You can install nvm from [here](https://github.com/nvm-sh/nvm).
+To get started, you'll need to have Node.js installed on your machine. We recommend using Node Version Manager (nvm) to manage your Node.js versions. You can install nvm from [here](httpss://github.com/nvm-sh/nvm).
 
 Once you have nvm installed, you can install Node.js 16 by running the following command in your terminal:
 ```bash
@@ -28,7 +28,7 @@ This will install all the necessary dependencies for running the application. On
 ```bash
 npm start
 ```
-The application should now be running locally on your machine, and you can access it by navigating to http://localhost:3000 in your web browser.
+The application should now be running locally on your machine, and you can access it by navigating to https://localhost:3000 in your web browser.
 
 If you encounter any issues with the dependencies after installation, you can run the `npm audit` command to check for potential vulnerabilities in the packages. In case vulnerabilities are identified, you can attempt to automatically fix them by running `npm audit fix`.
 

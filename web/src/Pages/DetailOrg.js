@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 
 async function fetchRequestById(id, token) {
   try {
-    const response = await fetch(`http://localhost:8080/tickets/solicitudsOrganitzador/${id}`, {
+    const response = await fetch(`https://culturapp-back.onrender.com/tickets/solicitudsOrganitzador/${id}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -18,7 +18,7 @@ async function fetchRequestById(id, token) {
     const reportData = await response.json();
 
     // Obtener el nombre de usuario
-    const usernameResponse = await fetch(`http://localhost:8080/users/${reportData.userSolicitant}`, {
+    const usernameResponse = await fetch(`https://culturapp-back.onrender.com/users/${reportData.userSolicitant}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -32,7 +32,7 @@ async function fetchRequestById(id, token) {
     reportData.username = usernameData.username;
     reportData.mail = usernameData.email;
 
-    const actividadesResponse = await fetch(`http://localhost:8080/activitats/read/${reportData.idActivitat}`, {
+    const actividadesResponse = await fetch(`https://culturapp-back.onrender.com/activitats/read/${reportData.idActivitat}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -73,7 +73,7 @@ const DetailOrg = ({token}) => {
 
   const handleDecline = async () => {
     try {
-      const response = await fetch(`http://localhost:8080/tickets/solicitudOrganitzador/${id}/rebutjar`, {
+      const response = await fetch(`https://culturapp-back.onrender.com/tickets/solicitudOrganitzador/${id}/rebutjar`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -94,7 +94,7 @@ const DetailOrg = ({token}) => {
 
   const handleAccept = async () => {
     try {
-      const response = await fetch(`http://localhost:8080/tickets/solicitudOrganitzador/${id}/acceptar`, {
+      const response = await fetch(`https://culturapp-back.onrender.com/tickets/solicitudOrganitzador/${id}/acceptar`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

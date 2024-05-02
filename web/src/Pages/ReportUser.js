@@ -10,7 +10,7 @@ function ReportUser({token}) {
   useEffect(() => {
     const fetchReports = async () => {
       try {
-        const response = await fetch('http://localhost:8080/tickets/reportsUsuaris/all', {
+        const response = await fetch('https://culturapp-back.onrender.com/tickets/reportsUsuaris/all', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -40,7 +40,7 @@ function ReportUser({token}) {
 
   const handleToDo = async (id) => {
     try {
-      const response = await fetch(`http://localhost:8080/tickets/reportsUsuari/${id}/solucionar`, {
+      const response = await fetch(`https://culturapp-back.onrender.com/tickets/reportsUsuari/${id}/solucionar`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -61,7 +61,7 @@ function ReportUser({token}) {
 
   const handleDone = async (id) => {
     try {
-      const response = await fetch(`http://localhost:8080/tickets/reportsUsuari/${id}/nosolucionar`, {
+      const response = await fetch(`https://culturapp-back.onrender.com/tickets/reportsUsuari/${id}/nosolucionar`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

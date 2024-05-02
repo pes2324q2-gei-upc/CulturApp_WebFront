@@ -3,7 +3,7 @@ import { useParams, Link } from "react-router-dom";
 
 async function fetchBugReportById(id, token) {
   try {
-    const response = await fetch(`http://localhost:8080/tickets/reportsBug/${id}`, {
+    const response = await fetch(`https://culturapp-back.onrender.com/tickets/reportsBug/${id}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -18,7 +18,7 @@ async function fetchBugReportById(id, token) {
     const reportData = await response.json();
 
     // Obtener el nombre de usuario
-    const usernameResponse = await fetch(`http://localhost:8080/users/${reportData.user}`, {
+    const usernameResponse = await fetch(`https://culturapp-back.onrender.com/users/${reportData.user}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -54,7 +54,7 @@ const DetailBug = ({ token }) => {
 
   const handleToDo = async () => {
     try {
-      const response = await fetch(`http://localhost:8080/tickets/reportsBug/${id}/nosolucionar`, {
+      const response = await fetch(`https://culturapp-back.onrender.com/tickets/reportsBug/${id}/nosolucionar`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -75,7 +75,7 @@ const DetailBug = ({ token }) => {
 
   const handleDone = async () => {
     try {
-      const response = await fetch(`http://localhost:8080/tickets/reportsBug/${id}/solucionar`, {
+      const response = await fetch(`https://culturapp-back.onrender.com/tickets/reportsBug/${id}/solucionar`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
