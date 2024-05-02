@@ -1,0 +1,198 @@
+/*------------GLBOAL------------*/
+
+.content {
+    flex: 1;
+    padding: 20px;
+    margin-left: 290px;
+    height: 100%;
+}
+
+.line {
+    margin-left: 20%;
+    width: 60%;
+    border-top: 1px solid black; /* Estilo de la línea */
+    
+}
+
+.titlesmenusection {
+    text-align: center;
+}
+
+/*------------GLBOAL END------------*/
+
+/*------------LIST BUG END------------*/
+
+/*------------LIST BUG END------------*/
+
+/*------------DETAIL BUG------------*/
+
+.detailBugtitle{
+    text-align: center;
+}
+
+.detailBugid {
+    text-align: center;
+}
+
+.detailBugcontent {
+    margin-left:  20%;
+}
+
+.detailBugsection {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.atribute {
+    color: #ff6e15;
+    font-size: 20px;
+}
+
+.value {
+    font-size: 20px;
+    width: 75%;
+    text-align: justify;
+}
+
+.detailbutton {
+    text-align: center;
+    padding: 20px;
+}
+
+.detailbutton button {
+    background-color: black; /* Color de fondo predeterminado */
+    color: white; /* Color del texto predeterminado */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.4s cubic-bezier(0.3, 1, 0.8, 1);
+}
+
+.detailbutton button {
+    background-color: black; /* Color de fondo predeterminado */
+    color: white; /* Color del texto predeterminado */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.4s cubic-bezier(0.3, 1, 0.8, 1);
+}
+
+.detailbutton button:hover {
+    background-color: #ff6e15; /* Cambia el color de fondo al pasar el ratón sobre el botón */
+}
+
+.backbutton {
+    margin-left: 80%;
+    background-color: black;
+}
+
+.backbutton:hover {
+    background-color: #ff6e15;
+}
+
+/*------------DETAIL BUG END------------*/
+
+/*------------DETAIL REQUEST ORG------------*/
+
+.actionbutton {
+    text-align: center;
+}
+
+.actionbutton button {
+    background-color: black; /* Color de fondo predeterminado */
+    color: white; /* Color del texto predeterminado */
+    border: none;
+    margin: 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.4s cubic-bezier(0.3, 1, 0.8, 1);
+}
+
+.actionbutton button:hover {
+    background-color: #ff6e15;
+}
+
+/*------------DETAIL REQUEST ORG END------------*/
+
+/*------------HOME------------*/
+
+.content-parraf {
+    text-align: justify;
+    width: 60%;
+    margin: 5% auto;
+    font-size: 22px;
+}
+
+.signature {
+    margin: 70px auto; /* Ajusta el margen superior y el margen automático horizontal */
+    text-align: center; /* Asegura que el texto esté centrado horizontalmente */
+}
+
+
+.great-vibes-regular {
+    font-family: "Great Vibes", cursive;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 2.5rem; /* Tamaño de letra más grande */
+}
+
+/*------------HOME END------------*/
+
+.container-menu {
+    display: flex;
+    position: fixed;
+    background: #ff6e15;
+    width: 250px;
+    height: 100%;
+    flex-direction: column;
+}
+
+.container-menu h2 {
+    padding: 30px;
+    text-align: center;
+    color: white;
+}
+
+.container-menu nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+}
+
+
+.container-menu nav ul li {
+    margin-bottom: 20px;
+    width: 100%;
+    text-align: center;
+}
+
+.container-menu nav ul li a {
+    text-decoration: none;
+    color: white;
+    display: block;
+    padding: 10px 0;
+    height: 30px;
+    display: flex;
+    align-items: center; /* Centra verticalmente el texto */
+    justify-content: center;
+}
+
+.container-menu nav ul li a.active {
+    background-color: white;
+    color: #ff6e15;
+}
+
+
+
+
+
+
+
+
