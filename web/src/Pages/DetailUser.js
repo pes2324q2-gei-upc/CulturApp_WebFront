@@ -3,7 +3,7 @@ import { useParams, Link } from "react-router-dom";
 
 async function fetchUserReportById(id, token) {
   try {
-    const response = await fetch(`http://localhost:8080/tickets/reportsUsuari/${id}`, {
+    const response = await fetch(`https://culturapp-back.onrender.com/tickets/reportsUsuari/${id}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -18,7 +18,7 @@ async function fetchUserReportById(id, token) {
     const reportData = await response.json();
 
     // Obtener el nombre de usuario
-    const usernameResponse = await fetch(`http://localhost:8080/users/${reportData.user}`, {
+    const usernameResponse = await fetch(`https://culturapp-back.onrender.com/users/${reportData.user}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -33,7 +33,7 @@ async function fetchUserReportById(id, token) {
     reportData.mail = usernameData.email;
 
     // Obtener el nombre de usuario
-    const usernamereportedResponse = await fetch(`http://localhost:8080/users/${reportData.usuariReportat}`, {
+    const usernamereportedResponse = await fetch(`https://culturapp-back.onrender.com/users/${reportData.usuariReportat}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -69,7 +69,7 @@ const DetailUser = ({token}) => {
 
   const handleToDo = async () => {
     try {
-      const response = await fetch(`http://localhost:8080/tickets/reportsUsuari/${id}/nosolucionar`, {
+      const response = await fetch(`https://culturapp-back.onrender.com/tickets/reportsUsuari/${id}/nosolucionar`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -90,7 +90,7 @@ const DetailUser = ({token}) => {
 
   const handleDone = async () => {
     try {
-      const response = await fetch(`http://localhost:8080/tickets/reportsUsuari/${id}/solucionar`, {
+      const response = await fetch(`https://culturapp-back.onrender.com/tickets/reportsUsuari/${id}/solucionar`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

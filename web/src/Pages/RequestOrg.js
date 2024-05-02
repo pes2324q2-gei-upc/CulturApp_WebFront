@@ -10,7 +10,7 @@ function RequestOrg( {token} ) {
   useEffect(() => {
     const fetchRequests = async () => {
       try {
-        const response = await fetch('http://localhost:8080/tickets//solicitudsOrganitzador/all', {
+        const response = await fetch('https://culturapp-back.onrender.com/tickets//solicitudsOrganitzador/all', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -33,7 +33,7 @@ function RequestOrg( {token} ) {
 
   const handleRefuse = async (id) => {
     try {
-      const response = await fetch(`http://localhost:8080/tickets/solicitudOrganitzador/${id}/rebutjar`, {
+      const response = await fetch(`https://culturapp-back.onrender.com/tickets/solicitudOrganitzador/${id}/rebutjar`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -54,7 +54,7 @@ function RequestOrg( {token} ) {
 
   const handleAccept = async (id) => {
     try {
-      const response = await fetch(`http://localhost:8080/tickets/solicitudOrganitzador/${id}/acceptar`, {
+      const response = await fetch(`https://culturapp-back.onrender.com/tickets/solicitudOrganitzador/${id}/acceptar`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

@@ -10,7 +10,7 @@ function ReportBug( {token} ) {
   useEffect(() => {
     const fetchReports = async () => {
       try {
-        const response = await fetch('http://localhost:8080/tickets/reportsBug/all',{
+        const response = await fetch('https://culturapp-back.onrender.com/tickets/reportsBug/all',{
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -38,7 +38,7 @@ function ReportBug( {token} ) {
 
   const handleToDo = async (id) => {
     try {
-      const response = await fetch(`http://localhost:8080/tickets/reportsBug/${id}/solucionar`, {
+      const response = await fetch(`https://culturapp-back.onrender.com/tickets/reportsBug/${id}/solucionar`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -59,7 +59,7 @@ function ReportBug( {token} ) {
 
   const handleDone = async (id) => {
     try {
-      const response = await fetch(`http://localhost:8080/tickets/reportsBug/${id}/nosolucionar`, {
+      const response = await fetch(`https://culturapp-back.onrender.com/tickets/reportsBug/${id}/nosolucionar`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

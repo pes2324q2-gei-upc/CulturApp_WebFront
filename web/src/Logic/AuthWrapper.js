@@ -13,7 +13,7 @@ export const AuthWrapper = () => {
 
   const login = async (username, password) => {
     try {
-      const response = await fetch('http://localhost:8080/admin/login', {
+      const response = await fetch('https://culturapp-back.onrender.com/admin/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
