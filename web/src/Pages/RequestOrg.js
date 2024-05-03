@@ -55,7 +55,7 @@ function RequestOrg( {token} ) {
   const handleAccept = async (id) => {
     try {
       const response = await fetch(`https://culturapp-back.onrender.com/tickets/solicitudOrganitzador/${id}/acceptar`, {
-        method: 'PUT',
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`,
