@@ -133,7 +133,7 @@ const DetailBug = ({ token }) => {
               <button onClick={handleToDo}>Done</button>
             ) : (
               <button onClick={handleDone}>To Do</button>
-            )}
+            )} 
           </div>
         </div>
       )}
