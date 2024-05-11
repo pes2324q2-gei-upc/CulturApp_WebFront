@@ -92,6 +92,58 @@
     background-color: #ff6e15;
 }
 
+.githubissues {
+    text-align: center;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 10px;
+    margin-left: auto; /* Centra horizontalmente automáticamente */
+    margin-right: auto;
+    width: 60%;
+}
+
+.github-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 120px;
+}
+
+.dropdown {
+    position: relative;
+}
+
+.dropdown-menu {
+    position: absolute;
+    list-style-type: none;
+    margin: 5px 0;
+    padding: 0;
+    border: 1px solid grey;
+}
+
+.dropdown-menu > li {
+    margin: 0;
+    background-color: white;
+}
+
+.dropdown-menu > li:hover {
+    background-color: lightgray;
+}
+
+.dropdown-menu > li > button {
+    width: 100%;
+    height: 100%;
+    text-align: left;
+
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 5px;
+    margin: 0;
+    font: inherit;
+    cursor: pointer;
+}
+
 /*------------DETAIL BUG END------------*/
 
 /*------------DETAIL REQUEST ORG------------*/

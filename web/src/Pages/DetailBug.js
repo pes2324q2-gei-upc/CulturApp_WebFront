@@ -41,7 +41,17 @@ async function fetchBugReportById(id, token) {
 
 const DetailBug = ({ token }) => {
   const { id } = useParams();
-  const [report, setReport] = useState(null);
+  const [report, setReport] = useState(null)
+  const [open, setOpen] = useState(false)
+  const [repo, setRepo] = useState("CulturApp_Front")
+  const [successMessage, setSuccessMessage] = useState("")
+  const [errorMessage, setErrorMessage] = useState("")
+  const tokengithub =  process.env.REACT_APP_GITHUB_ACCESS_TOKEN
+  console.log(tokengithub)
+
+  const handleOpen = () => {
+    setOpen(!open);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -94,6 +104,47 @@ const DetailBug = ({ token }) => {
     }
   };
 
+  const handlerepo1 = () => {
+    setRepo("CulturApp_Front");
+    setOpen(false);
+  };
+
+  const handlerepo2 = () => {
+    setRepo("CulturApp_Back");
+    setOpen(false);
+  };
+
+  const sendissue = async (report) => {
+    try {
+      const response = await fetch(`https://api.github.com/repos/pes2324q2-gei-upc/${repo}/issues`, {
+          method: 'POST',
+          headers: {
+              'Authorization': `token ${tokengithub}`,
+              'Accept': 'application/vnd.github.v3+json',
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+              title: report.titol,
+              body: report.report
+          })
+      });
+  
+      if (response.ok) {
+        setSuccessMessage('The issue was successfully created');
+        setErrorMessage('');
+      } else {
+        setErrorMessage(`Error when creating the issue: ${response.status}`);
+        const responseData = await response.json();
+        console.error(responseData);
+        setSuccessMessage('');
+      }
+    } catch (error) {
+      console.error('Error on the application:', error);
+      setErrorMessage(`Error on the applicaiton: ${error.message}`);
+      setSuccessMessage('');
+    }
+  };
+
   // Función para formatear la fecha
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -128,12 +179,34 @@ const DetailBug = ({ token }) => {
             <p className="atribute">Mail</p>
             <p className="value">{report.mail}</p>
           </div>
+          <div className="githubissues">
+            <h3 className="detailBugsection">GitHub issues</h3>
+            <div className="github-buttons">
+              <div className="dropdown">
+                <button onClick={handleOpen}>Repository</button>
+                {open ? (
+                  <ul className="dropdown-menu">
+                    <li className="menu-item">
+                      <button onClick={handlerepo1}>CulturApp_Front</button>
+                    </li>
+                    <li className="menu-item">
+                      <button onClick={handlerepo2}>CulturApp_Back</button>
+                    </li>
+                  </ul>
+                ) : null}
+              </div>
+              <button onClick={() => sendissue(report)}>Send issue</button>
+            </div>
+            {repo && <p>Selected repository: {repo}</p>}
+            {successMessage && <p>{successMessage}</p>}
+            {errorMessage && <p>{errorMessage}</p>}
+          </div>
           <div className="detailbutton">
             {report.solucionat ? (
               <button onClick={handleToDo}>Done</button>
             ) : (
               <button onClick={handleDone}>To Do</button>
-            )} 
+            )}
           </div>
         </div>
       )}
