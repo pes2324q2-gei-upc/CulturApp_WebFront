@@ -99,7 +99,8 @@
     padding: 10px;
     margin-left: auto; /* Centra horizontalmente automáticamente */
     margin-right: auto;
-    width: 60%;
+    margin-top: 3%;
+    width: 50%;
 }
 
 .github-buttons {
@@ -111,6 +112,23 @@
 
 .dropdown {
     position: relative;
+    margin-right: 5%;
+}
+
+.dropdown-button {
+    background-color: black;
+}
+
+.dropdown-button:hover {
+    background-color:#ff6e15;
+}
+
+.send-button {
+    background-color: black;
+}
+
+.send-button:hover {
+    background-color:#ff6e15;
 }
 
 .dropdown-menu {
@@ -142,6 +160,14 @@
     margin: 0;
     font: inherit;
     cursor: pointer;
+}
+
+.okmessage {
+    color: green;
+}
+
+.failmessage {
+    color: red;
 }
 
 /*------------DETAIL BUG END------------*/

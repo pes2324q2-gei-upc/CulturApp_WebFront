@@ -46,8 +46,6 @@ const DetailBug = ({ token }) => {
   const [repo, setRepo] = useState("CulturApp_Front")
   const [successMessage, setSuccessMessage] = useState("")
   const [errorMessage, setErrorMessage] = useState("")
-  const tokengithub =  process.env.REACT_APP_GITHUB_ACCESS_TOKEN
-  console.log(tokengithub)
 
   const handleOpen = () => {
     setOpen(!open);
@@ -119,7 +117,7 @@ const DetailBug = ({ token }) => {
       const response = await fetch(`https://api.github.com/repos/pes2324q2-gei-upc/${repo}/issues`, {
           method: 'POST',
           headers: {
-              'Authorization': `token ${tokengithub}`,
+              'Authorization': `token ${process.env.REACT_APP_GITHUB_ACCESS_TOKEN}`,
               'Accept': 'application/vnd.github.v3+json',
               'Content-Type': 'application/json'
           },
@@ -183,7 +181,7 @@ const DetailBug = ({ token }) => {
             <h3 className="detailBugsection">GitHub issues</h3>
             <div className="github-buttons">
               <div className="dropdown">
-                <button onClick={handleOpen}>Repository</button>
+                <button onClick={handleOpen} className="dropdown-button">Repository</button>
                 {open ? (
                   <ul className="dropdown-menu">
                     <li className="menu-item">
@@ -195,11 +193,11 @@ const DetailBug = ({ token }) => {
                   </ul>
                 ) : null}
               </div>
-              <button onClick={() => sendissue(report)}>Send issue</button>
+              <button onClick={() => sendissue(report)} className="send-button">Send issue</button>
             </div>
-            {repo && <p>Selected repository: {repo}</p>}
-            {successMessage && <p>{successMessage}</p>}
-            {errorMessage && <p>{errorMessage}</p>}
+            {repo && <p>Selected repository: <strong>{repo}</strong></p>}
+            {successMessage && <p className="okmessage">{successMessage}</p>}
+            {errorMessage && <p className="failmessage">{errorMessage}</p>}
           </div>
           <div className="detailbutton">
             {report.solucionat ? (
