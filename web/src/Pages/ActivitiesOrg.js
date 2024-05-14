@@ -52,7 +52,7 @@ function ActivitiesOrg( {token} ) {
       <h1 className="titlesmenusection">List of Activities with Organizers</h1>
       <ul style={{ listStyleType: 'none' }}>
         {activities.map((activitat) => (
-          <li key={activitat.id}>
+          <li key={activitat.denominaci}>
             <Link to={`${activitat.id}`} style={{ textDecoration: 'none' }}>
               <Notification activitat={activitat} />
             </Link>

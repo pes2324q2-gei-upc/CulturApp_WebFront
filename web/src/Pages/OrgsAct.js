@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import "../RequestOrg.css"
 
-function OrgsAct( {activitat, token} ) {
-  const [requestOrg, setRequestOrg] = useState([]);
+function OrgsAct( {token} ) {
+  const { id } = useParams();
+  const [organitzadors, setOrganitzadors] = useState([]);
  
   useEffect(() => {
     const fetchReports = async () => {
@@ -29,7 +30,7 @@ function OrgsAct( {activitat, token} ) {
     fetchReports();
   }, []);
 
-  const handleRefuse = async (id) => {
+  const handleRefuse = async ({idActivitat, idUser}) => {
     try {
       const response = await fetch(`https://culturapp-back.onrender.com/tickets/reportsBug/${id}/solucionar`, {
         method: 'PUT',
@@ -51,19 +52,18 @@ function OrgsAct( {activitat, token} ) {
   };
 
 
-  const StateButtonUI = ({id, activitat}) => (
+  const StateButtonUI = ({organitzador}) => (
     <div>
       <button className="refuseButton" onClick={(e) => {
         e.preventDefault(); // Evitar la redirección predeterminada
-        handleRefuse(id);
-        
-        setActivities(activities.filter(activitatF => activitatF !== activitat)); 
+        handleRefuse(organitzador.user, organitzador.activitat);
+        setOrganitzadors(organitzadors.filter(organitzadorT => organitzadorT !== organitzador)); 
       }}> <span>Decline</span>
       </button>
     </div>
   );
 
-  const Notification = ({ activitat }) => {
+  const Notification = ({ organitzador }) => {
     const MAX_LENGTH = 120;
     const truncateText = (text) => {
       if (text.length > MAX_LENGTH) {
@@ -75,10 +75,10 @@ function OrgsAct( {activitat, token} ) {
       <div className="notification">
         <div className="notiglow"></div>
         <div className="notiborderglow"></div>
-        <div className="notititle">{activitat.titol}</div>
-        <div className="notibody">{truncateText(activitat.report)}</div>
+        <div className="notititle">{organitzador.user}</div>
+        <div className="notibody">{truncateText(organitzador.email)}</div>
         <div>
-          <StateButtonUI id={activitat.id} activitat={activitat}/>
+          <StateButtonUI organitzadors={organitzador}/>
         </div>
       </div>
     );
@@ -88,10 +88,10 @@ function OrgsAct( {activitat, token} ) {
     <div className="content">
       <h1 className="titlesmenusection">Organitzadors Activitat</h1>
       <ul style={{ listStyleType: 'none' }}>
-        {activities.map((activitat) => (
-          <li key={activitat.id}>
-            <Link to={`/org/${activitat.idActivitat}/${activitat.userSolicitant}`} style={{ textDecoration: 'none' }}>
-              <Notification activitat={activitat} />
+        {organitzadors.map((organitzador) => (
+          <li key={organitzador.id}>
+            <Link to={`/org/${organitzador.activitat}/${organitzador.user}`} style={{ textDecoration: 'none' }}>
+              <Notification organitzador={organitzador} />
             </Link>
           </li>
         ))}
