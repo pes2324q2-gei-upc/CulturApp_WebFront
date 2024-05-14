@@ -16,6 +16,8 @@ export const AuthWrapper = () => {
   useEffect(() => {
     const token = Cookies.get('token');
     if (token) {
+      Cookies.set('token', token); // Store the token in a cookie
+      setToken(token); // Set the token upon successful login
       setUser({name: "", isAuthenticated: true});
     }
   }, []);
