@@ -1,4 +1,4 @@
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useHistory } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 
 
@@ -7,75 +7,52 @@ const DetailOrgAct = ({token}) => {
     const [user, setUser] = useState({});
     const [activity, setActivity] = useState({});
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const reportData = await fetchRequestById(id, token);
-      setReport(reportData);
-    };
+    useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const userData = await fetchUserData(idUser, token);
+            setUser(userData);
+    
+            const activityData = await fetchActivityData(idAct, token);
+            setActivity(activityData);
+          } catch (error) {
+            console.error('Error fetching data:', error);
+          }
+        };
+        fetchData();
+      }, [idAct, idUser, token]);
 
-    fetchData();
-  }, [id, token]);
-
-  async function fetchRequestById(id, token) {
-    try {
-      const response = await fetch(`https://culturapp-back.onrender.com/tickets/solicitudsOrganitzador/${id}`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
-        },
-      });
-  
-      if (!response.ok) {
-        throw new Error('Error fetching bug report');
-      }
-  
-      const reportData = await response.json();
-  
-      // Obtener el nombre de usuario
-      const usernameResponse = await fetch(`https://culturapp-back.onrender.com/users/${reportData.userSolicitant}`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
-        },
-      });
-      if (!usernameResponse.ok) {
-        throw new Error('Error fetching username');
-      }
-      const usernameData = await usernameResponse.json();
-      reportData.username = usernameData.username;
-      reportData.mail = usernameData.email;
-  
-      const actividadesResponse = await fetch(`https://culturapp-back.onrender.com/activitats/read/${reportData.idActivitat}`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
-        },
-      });
-      if (!actividadesResponse.ok) {
-        throw new Error('Error fetching username');
-      }
-      const activitatData = await actividadesResponse.json();
-      reportData.actdir = activitatData.adre_a;
-      reportData.actdatini = activitatData.data_inici;
-      reportData.actdatfi = activitatData.data_fi;
-      reportData.acttitol = activitatData.denominaci;
-      reportData.actdescr = activitatData.descripcio;
-  
-      console.log(reportData);
-  
-      return reportData;
-    } catch (error) {
-      console.error('Error fetching bug report:', error);
-      return null;
+  async function fetchUserData(idUser, token) {
+    const response = await fetch(`https://culturapp-back.onrender.com/users/${idUser}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+    });
+    if (!response.ok) {
+      throw new Error('Error fetching user data');
     }
+    return response.json();
+  }
+
+  async function fetchActivityData(idAct, token) {
+    const response = await fetch(`https://culturapp-back.onrender.com/activitats/read/${idAct}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+    });
+    if (!response.ok) {
+      throw new Error('Error fetching activity data');
+    }
+    return response.json();
   }
 
   const handleDecline = async () => {
     try {
-      const response = await fetch(`https://culturapp-back.onrender.com/tickets/solicitudOrganitzador/${id}/rebutjar`, {
+      const response = await fetch(`https://culturapp-back.onrender.com`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -87,8 +64,7 @@ const DetailOrgAct = ({token}) => {
         throw new Error('Error setting report to To Do');
       }
 
-      // Actualizar el estado del reporte para reflejar el cambio
-      setReport(prevReport => ({ ...prevReport, solucionat: false }));
+      history.push(`/list-act-org/${idAct}`);
     } catch (error) {
       console.error('Error setting report to To Do:', error);
     }
@@ -134,7 +110,7 @@ const DetailOrgAct = ({token}) => {
             </div>
         </div>
       )}
-      <Link to="/list-act-org/:id">
+      <Link to={`/list-act-org/${idAct}`}>
         <button className="backbutton">Back</button>
       </Link>
     </div>

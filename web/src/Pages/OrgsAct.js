@@ -7,45 +7,48 @@ function OrgsAct( {token} ) {
   const [organitzadors, setOrganitzadors] = useState([]);
  
   useEffect(() => {
-    const fetchReports = async () => {
+    const fetchData = async () => {
       try {
-        const response = await fetch('https://culturapp-back.onrender.com/tickets/reportsBug/all',{
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`,
-          },
-        });
-        if (!response.ok) {
-          throw new Error('Error fetching reports');
-        }
-        const data = await response.json();
-        setActivities(data);
-
+        const organitzadorsData = await fetchOrganitzadorsData(idUser, token);
+        setUser(organitzadorsData);
       } catch (error) {
-        console.error('Error fetching reports:', error);
+        console.error('Error fetching data:', error);
       }
     };
+    fetchData();
+  }, [id, token]);
 
-    fetchReports();
-  }, []);
+  async function fetchOrganitzadorsData(idUser, token) {
+    try {
+      const orgResponse = await fetch('https://culturapp-back.onrender.com/',{
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+      });
+      if (!orgResponse.ok) {
+        throw new Error('Error fetching organizers data');
+      }
+      const orgData = await orgResponse.json();
+      setActivities(orgData);
+    } catch (error) {
+      console.error('Error fetching organizers:', error);
+    }
+  }
 
   const handleRefuse = async ({idActivitat, idUser}) => {
     try {
-      const response = await fetch(`https://culturapp-back.onrender.com/tickets/reportsBug/${id}/solucionar`, {
+      const response = await fetch(`https://culturapp-back.onrender.com`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`,
         },
       });
-  
       if (!response.ok) {
         throw new Error('Error setting report to To Do');
       }
-  
-      const data = await response.text();
-      console.log(data); // Manejar la respuesta de la API según sea necesario
     } catch (error) {
       console.error('Error setting report to To Do:', error);
     }

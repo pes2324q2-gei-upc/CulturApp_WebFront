@@ -6,26 +6,25 @@ function ActivitiesOrg( {token} ) {
   const [activities, setActivities] = useState([]);
 
   useEffect(() => {
-    const fetchReports = async () => {
+    const fetchActivities = async () => {
       try {
-        const response = await fetch('https://culturapp-back.onrender.com/tickets/reportsBug/all',{
+        const activitiesResponse = await fetch('https://culturapp-back.onrender.com',{
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`,
           },
         });
-        if (!response.ok) {
+        if (!activitiesResponse.ok) {
           throw new Error('Error fetching activities');
         }
-        const data = await response.json();
-        setActivities(data);
+        const activitiesData = await activitiesResponse.json();
+        setActivities(activitiesData);
       } catch (error) {
         console.error('Error fetching activities:', error);
       }
     };
-
-    fetchReports();
+    fetchActivities();
   }, []);
 
 
@@ -53,7 +52,7 @@ function ActivitiesOrg( {token} ) {
       <ul style={{ listStyleType: 'none' }}>
         {activities.map((activitat) => (
           <li key={activitat.denominaci}>
-            <Link to={`${activitat.id}`} style={{ textDecoration: 'none' }}>
+            <Link to={`${activitat.codi}`} style={{ textDecoration: 'none' }}>
               <Notification activitat={activitat} />
             </Link>
           </li>
