@@ -1,4 +1,4 @@
-import { useParams, Link, useHistory } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 
 
@@ -6,6 +6,7 @@ const DetailOrgAct = ({token}) => {
     const { idAct, idUser } = useParams();
     const [user, setUser] = useState({});
     const [activity, setActivity] = useState({});
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -52,19 +53,22 @@ const DetailOrgAct = ({token}) => {
 
   const handleDecline = async () => {
     try {
-      const response = await fetch(`https://culturapp-back.onrender.com`, {
+      const response = await fetch(`https://culturapp-back.onrender.com/users/${idUser}/treureRol`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`,
         },
+        body: JSON.stringify({
+          activitatID: idAct,
+        })
       });
   
       if (!response.ok) {
         throw new Error('Error setting report to To Do');
       }
 
-      history.push(`/list-act-org/${idAct}`);
+      navigate(`/list-act-org/${idAct}`);
     } catch (error) {
       console.error('Error setting report to To Do:', error);
     }
@@ -80,7 +84,6 @@ const DetailOrgAct = ({token}) => {
   return (
     <div className="content">
       <h1 className="detailBugtitle">Request Organitzador</h1>
-      <h2 className="detailBugid">ID: {id}</h2>
       {user && activity && (
         <div>
           <h3 className="detailBugsection">About the user</h3>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import "../RequestOrg.css"
 
 function OrgsAct( {token} ) {
@@ -9,8 +9,7 @@ function OrgsAct( {token} ) {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const organitzadorsData = await fetchOrganitzadorsData(idUser, token);
-        setUser(organitzadorsData);
+        await fetchOrganitzadorsData(id, token);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -18,9 +17,9 @@ function OrgsAct( {token} ) {
     fetchData();
   }, [id, token]);
 
-  async function fetchOrganitzadorsData(idUser, token) {
+  async function fetchOrganitzadorsData(id, token) {
     try {
-      const orgResponse = await fetch('https://culturapp-back.onrender.com/',{
+      const orgResponse = await fetch(`https://culturapp-back.onrender.com/organitzadors/activitat/${id}/organitzadors`,{
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -31,20 +30,25 @@ function OrgsAct( {token} ) {
         throw new Error('Error fetching organizers data');
       }
       const orgData = await orgResponse.json();
-      setActivities(orgData);
+      setOrganitzadors(orgData);
     } catch (error) {
       console.error('Error fetching organizers:', error);
     }
   }
 
-  const handleRefuse = async ({idActivitat, idUser}) => {
+  const handleRefuse = async (organitzador) => {
+    console.log("handle refuse")
+    console.log(organitzador.user, organitzador.activitat);
     try {
-      const response = await fetch(`https://culturapp-back.onrender.com`, {
+      const response = await fetch(`https://culturapp-back.onrender.com/users/${organitzador.user}/treureRol`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`,
         },
+        body: JSON.stringify({
+          activitatID: organitzador.activitat,
+        })
       });
       if (!response.ok) {
         throw new Error('Error setting report to To Do');
@@ -59,7 +63,9 @@ function OrgsAct( {token} ) {
     <div>
       <button className="refuseButton" onClick={(e) => {
         e.preventDefault(); // Evitar la redirección predeterminada
-        handleRefuse(organitzador.user, organitzador.activitat);
+        console.log("statebutton")
+        console.log(organitzador)
+        handleRefuse(organitzador);
         setOrganitzadors(organitzadors.filter(organitzadorT => organitzadorT !== organitzador)); 
       }}> <span>Decline</span>
       </button>
@@ -80,8 +86,9 @@ function OrgsAct( {token} ) {
         <div className="notiborderglow"></div>
         <div className="notititle">{organitzador.user}</div>
         <div className="notibody">{truncateText(organitzador.email)}</div>
+        <div className="notibody">{truncateText(organitzador.activitat)}</div>
         <div>
-          <StateButtonUI organitzadors={organitzador}/>
+          <StateButtonUI organitzador={organitzador}/>
         </div>
       </div>
     );
@@ -90,15 +97,19 @@ function OrgsAct( {token} ) {
   return (
     <div className="content">
       <h1 className="titlesmenusection">Organitzadors Activitat</h1>
-      <ul style={{ listStyleType: 'none' }}>
-        {organitzadors.map((organitzador) => (
-          <li key={organitzador.id}>
-            <Link to={`/org/${organitzador.activitat}/${organitzador.user}`} style={{ textDecoration: 'none' }}>
-              <Notification organitzador={organitzador} />
-            </Link>
-          </li>
-        ))}
-      </ul>
+      {organitzadors && organitzadors.length > 0 ? (
+        <ul style={{ listStyleType: 'none' }}>
+          {organitzadors.map((organitzador) => (
+            <li key={organitzador.id}>
+              <Link to={`/org/${organitzador.activitat}/${organitzador.user}`} style={{ textDecoration: 'none' }}>
+                <Notification organitzador={organitzador} />
+              </Link>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <h2>There are no organizers</h2>
+      )}
     </div>
   );
 }

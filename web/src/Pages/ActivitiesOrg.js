@@ -8,7 +8,7 @@ function ActivitiesOrg( {token} ) {
   useEffect(() => {
     const fetchActivities = async () => {
       try {
-        const activitiesResponse = await fetch('https://culturapp-back.onrender.com',{
+        const activitiesResponse = await fetch('https://culturapp-back.onrender.com/organitzadors/llistarActivitats',{
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -31,17 +31,17 @@ function ActivitiesOrg( {token} ) {
   const Notification = ({ activitat }) => {
     const MAX_LENGTH = 120;
     const truncateText = (text) => {
-      if (text.length > MAX_LENGTH) {
-          return text.substring(0, MAX_LENGTH) + '...';
+      if (text && text.length > MAX_LENGTH) {
+        return text.substring(0, MAX_LENGTH) + '...';
       }
       return text;
-    }; 
+    };     
     return (
       <div className="notification">
         <div className="notiglow"></div>
         <div className="notiborderglow"></div>
         <div className="notititle">{activitat.denominaci}</div>
-        <div className="notibody">{truncateText(activitat.id)}</div>
+        <div className="notibody">{truncateText(activitat.descripcio)}</div>
       </div>
     );
   };
