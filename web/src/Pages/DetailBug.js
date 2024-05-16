@@ -181,7 +181,10 @@ const DetailBug = ({ token }) => {
             <h3 className="detailBugsection">GitHub issues</h3>
             <div className="github-buttons">
               <div className="dropdown">
-                <button onClick={handleOpen} className="dropdown-button">{ repo }</button>
+                <button onClick={handleOpen} className="dropdown-button">
+                  { repo }
+                  <i className={open ? "fas fa-caret-up icon-margin" : "fas fa-caret-down icon-margin"}></i>
+                </button>
                 {open ? (
                   <ul className="dropdown-menu">
                     <li>

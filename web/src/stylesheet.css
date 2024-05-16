@@ -122,6 +122,10 @@
     width: 100%;
 }
 
+.icon-margin {
+    margin-left: 5%;
+  }  
+
 .dropdown-button:hover {
     background-color:#ff6e15;
 }
