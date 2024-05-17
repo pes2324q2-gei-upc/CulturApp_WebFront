@@ -181,13 +181,16 @@ const DetailBug = ({ token }) => {
             <h3 className="detailBugsection">GitHub issues</h3>
             <div className="github-buttons">
               <div className="dropdown">
-                <button onClick={handleOpen} className="dropdown-button">Repository</button>
+                <button onClick={handleOpen} className="dropdown-button">
+                  { repo }
+                  <i className={open ? "fas fa-caret-up icon-margin" : "fas fa-caret-down icon-margin"}></i>
+                </button>
                 {open ? (
                   <ul className="dropdown-menu">
-                    <li className="menu-item">
+                    <li>
                       <button onClick={handlerepo1}>CulturApp_Front</button>
                     </li>
-                    <li className="menu-item">
+                    <li>
                       <button onClick={handlerepo2}>CulturApp_Back</button>
                     </li>
                   </ul>
@@ -195,7 +198,6 @@ const DetailBug = ({ token }) => {
               </div>
               <button onClick={() => sendissue(report)} className="send-button">Send issue</button>
             </div>
-            {repo && <p>Selected repository: <strong>{repo}</strong></p>}
             {successMessage && <p className="okmessage">{successMessage}</p>}
             {errorMessage && <p className="failmessage">{errorMessage}</p>}
           </div>
