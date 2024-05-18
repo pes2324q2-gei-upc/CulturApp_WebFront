@@ -179,9 +179,8 @@
 /*------------DETAIL USER REPORT------------*/
 
 .forum-message {
-    margin-left: 15%;
     border: 1px solid black;
-    width: 30%;
+    width: 40%;
 }
 
 .forum-atribute {
@@ -191,7 +190,7 @@
 }
 
 .forum-value {
-    font-size: 20px;
+    font-size: 18px;
     text-align: justify;
     padding-left: 5%;
 }
