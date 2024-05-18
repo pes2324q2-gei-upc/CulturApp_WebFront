@@ -176,6 +176,28 @@
 
 /*------------DETAIL BUG END------------*/
 
+/*------------DETAIL USER REPORT------------*/
+
+.forum-message {
+    margin-left: 15%;
+    border: 1px solid black;
+    width: 30%;
+}
+
+.forum-atribute {
+    color: #ff6e15;
+    font-size: 18px;
+    padding-left: 5%;
+}
+
+.forum-value {
+    font-size: 20px;
+    text-align: justify;
+    padding-left: 5%;
+}
+
+/*------------DETAIL USER REPORT END------------*/
+
 /*------------DETAIL REQUEST ORG------------*/
 
 .actionbutton {
