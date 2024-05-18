@@ -57,15 +57,18 @@ async function fetchUserReportById(id, token) {
 const DetailUser = ({token}) => {
   const { id } = useParams();
   const [report, setReport] = useState(null);
+  const [reportType, setType] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       const reportData = await fetchUserReportById(id, token);
       setReport(reportData);
+      setType(getTypeFromPlaceReport(reportData.placeReport));
     };
 
     fetchData();
   }, [id, token]);
+
 
   const handleToDo = async () => {
     try {
@@ -116,6 +119,22 @@ const DetailUser = ({token}) => {
     return { day, time };
   };
 
+  function getTypeFromPlaceReport(placeReport) {
+    if (placeReport.startsWith("forum")) {
+      return "Forum";
+    } else if (placeReport.startsWith("group")) {
+      return "Group";
+    } else if (placeReport.startsWith("chat")) {
+      return "Chat";
+    } else {
+      return "Unknown";
+    }
+  }
+
+  function extractIdFromPlaceReport(placeReport) {
+    return placeReport.split(" ")[1];
+  }
+
   return (
     <div className="content">
       <h1 className="detailBugtitle">Detail User report</h1>
@@ -133,6 +152,30 @@ const DetailUser = ({token}) => {
             <p className="value">{formatDate(report.data_report).day}</p>
             <p className="atribute">Time</p>
             <p className="value">{formatDate(report.data_report).time}</p>
+            <p className="atribute">Type</p>
+            <p className="value">{reportType}</p>
+            {reportType === "Forum" && (
+              <>
+                <p className="atribute">Forum ID</p>
+              </>
+            )}
+            {reportType === "Group" && (
+              <>
+                <p className="atribute">Group ID</p>
+              </>
+            )}
+            {reportType === "Chat" && (
+              <>
+                <p className="atribute">Chat ID</p>
+              </>
+            )}
+            <p className="value">{extractIdFromPlaceReport(report.placeReport)}</p>
+            {reportType === "Forum" && report.forumMessage && (
+              <>
+                <p className="atribute">Forum Message</p>
+                <p className="value">{report.forumMessage.mensaje}</p>
+              </>
+            )}
             <p className="atribute">User reported</p>
             <p className="value">{report.usernamereported}</p>
             <p className="atribute">Mail</p>
