@@ -46,6 +46,27 @@
     color: #888;
   }
 
+  .unban-button-page {
+    outline: none;
+    cursor: pointer;
+    border: none;
+    padding: 0.9rem 2rem;
+    font-family: inherit;
+    font-size: inherit;
+    position: absolute; /* Change position to absolute */
+    right: 2%; /* Align to the maximum right */
+    top: 27%; /* Optionally, adjust the top position */
+    display: inline-block;
+    letter-spacing: 0.05rem;
+    font-weight: 700;
+    font-size: 17px;
+    border-radius: 500px;
+    overflow: hidden;
+    background: black;
+    color: ghostwhite;
+    z-index: 30;
+  }
+
   .notfound {
     color:#ff6e15;
     text-align: center;

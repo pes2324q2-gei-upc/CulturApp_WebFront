@@ -35,6 +35,38 @@ function ReportUser({ token }) {
     report.username.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  const handleUnban = async(id) => {
+    try {
+      const response = await fetch(`https://culturapp-back.onrender.com/users/${id}/unban`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error('Error setting the unban');
+      }
+    } catch (error) {
+      console.error('Error setting report to Done:', error);
+    }
+  };
+
+
+  const Notification = ({ report }) => {
+    return (
+      <div className="notification">
+        <div className="notiglow"></div>
+        <div className="notiborderglow"></div>
+        <div className="notititle">{report.username}</div>
+        <div className="notibody"><strong>User ID: </strong>{report.id}</div>
+        <div className="notibody"><strong>Email: </strong>{report.email}</div>
+        <button className="unban-button-page" onClick={() => handleUnban(report.id)}>Unban user</button>
+      </div>
+    );
+  };
+
   return (
     <div className="content">
       <h1 className="titlesmenusection">Banned users</h1>
@@ -52,8 +84,7 @@ function ReportUser({ token }) {
         <ul>
           {filteredReports.map((report) => (
             <li key={report.id}>
-              <p><strong>Username:</strong> {report.username}</p>
-              <p><strong>Email:</strong> {report.email}</p>
+              <Notification report={report} />
             </li>
           ))}
         </ul>
