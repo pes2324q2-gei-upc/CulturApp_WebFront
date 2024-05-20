@@ -67,6 +67,10 @@
     z-index: 30;
   }
 
+  .unban-button-page:hover {
+    background-color:#ff6e15;
+  }
+
   .notfound {
     color:#ff6e15;
     text-align: center;

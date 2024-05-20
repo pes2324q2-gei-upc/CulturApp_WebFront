@@ -35,7 +35,7 @@ function ReportUser({ token }) {
     report.username.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const handleUnban = async(id) => {
+  const handleUnban = async (id) => {
     try {
       const response = await fetch(`https://culturapp-back.onrender.com/users/${id}/unban`, {
         method: 'DELETE',
@@ -47,12 +47,14 @@ function ReportUser({ token }) {
 
       if (!response.ok) {
         throw new Error('Error setting the unban');
+      } else {
+        // Si la desbloqueo fue exitosa, eliminar el usuario de la lista
+        setReports(prevReports => prevReports.filter(report => report.id !== id));
       }
     } catch (error) {
       console.error('Error setting report to Done:', error);
     }
   };
-
 
   const Notification = ({ report }) => {
     return (
