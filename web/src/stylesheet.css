@@ -113,11 +113,18 @@
 .dropdown {
     position: relative;
     margin-right: 5%;
+    width: 30%;
 }
 
 .dropdown-button {
     background-color: black;
+    display: inline-block;
+    width: 100%;
 }
+
+.icon-margin {
+    margin-left: 5%;
+  }  
 
 .dropdown-button:hover {
     background-color:#ff6e15;
@@ -134,32 +141,29 @@
 .dropdown-menu {
     position: absolute;
     list-style-type: none;
-    margin: 5px 0;
+    width: 100%;
     padding: 0;
+    margin: 0;
     border: 1px solid grey;
 }
 
 .dropdown-menu > li {
-    margin: 0;
     background-color: white;
-}
-
-.dropdown-menu > li:hover {
-    background-color: lightgray;
+    padding: 0;
+    border: 1px solid grey;
 }
 
 .dropdown-menu > li > button {
     width: 100%;
-    height: 100%;
-    text-align: left;
-
-    background: none;
-    color: inherit;
-    border: none;
-    padding: 5px;
-    margin: 0;
+    text-align: center;
+    color: black;
     font: inherit;
     cursor: pointer;
+    background-color: white;
+}
+
+.dropdown-menu > li > button:hover {
+    background-color: lightgray;
 }
 
 .okmessage {
