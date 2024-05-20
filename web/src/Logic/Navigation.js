@@ -1,7 +1,7 @@
 // Navigation.js
 import React from "react";
 import DetailBug from "../Pages/DetailBug";
-import DetailOrg from "../Pages/OrgsAct";
+import DetailOrg from "../Pages/DetailOrg";
 import DetailUser from "../Pages/DetailUser";
 import Home from "../Pages/Home";
 import { Login } from "../Pages/Login";
@@ -22,8 +22,7 @@ export const nav = [
   { path: "/request-org", name: "RequestOrg", element: <RequestOrg /> },
   { path: "/request-org/:id", name: "DetailOrg", element: <DetailOrg /> },
   { path: "/login", name: "Login", element: <Login /> },
-  { path: "/banned-users", name: "Banned Users", element: <BannedUsers /> }
-  { path: "/request-org/:id", name: "DetailRequestOrg", element: <DetailOrg /> },
+  { path: "/banned-users", name: "Banned Users", element: <BannedUsers /> },
   { path: "/list-act-org", name: "ListActivitiesOrg", element: <ActivitiesOrg/>},
   { path: "/list-act-org/:id", name: "OrgsAct", element: <OrgsAct/> },
   { path: "/org/:idAct/:idUser", name: "Login", element: <DetailOrgAct /> }
