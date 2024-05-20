@@ -198,6 +198,25 @@
     padding-left: 5%;
 }
 
+.banactions {
+    display: flex;
+    justify-content: center;
+    gap: 2%;
+    padding-top: 2%;
+}
+
+.banactions button {
+    background-color: black;
+}
+
+.banactions button:hover {
+    background-color: #ff6e15;
+}
+
+.status-messages {
+    text-align: center;
+}
+
 /*------------DETAIL USER REPORT END------------*/
 
 /*------------DETAIL REQUEST ORG------------*/

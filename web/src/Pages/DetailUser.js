@@ -58,6 +58,8 @@ const DetailUser = ({token}) => {
   const { id } = useParams();
   const [report, setReport] = useState(null);
   const [reportType, setType] = useState(null);
+  const [successMessage, setSuccessMessage] = useState("")
+  const [errorMessage, setErrorMessage] = useState("")
 
   useEffect(() => {
     const fetchData = async () => {
@@ -65,7 +67,6 @@ const DetailUser = ({token}) => {
       setReport(reportData);
       setType(getTypeFromPlaceReport(reportData.placeReport));
     };
-
     fetchData();
   }, [id, token]);
 
@@ -117,6 +118,54 @@ const DetailUser = ({token}) => {
     const day = date.toLocaleDateString('es-ES', { day: 'numeric', month: 'numeric', year: 'numeric' });
     const time = date.toLocaleTimeString('es-ES');
     return { day, time };
+  };
+
+  const handleBan = async() => {
+    try {
+      const response = await fetch(`https://culturapp-back.onrender.com/users/${report.usuariReportat}/ban`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+      });
+  
+      if (!response.ok) {
+        setSuccessMessage('');
+        setErrorMessage('Error banning the user');
+        throw new Error('Error');
+      }
+      else {
+        setSuccessMessage('User successfully banned');
+        setErrorMessage('');
+      }
+    } catch (error) {
+      console.error('Error setting the ban', error);
+    }
+  };
+
+  const handleUnban = async() => {
+    try {
+      const response = await fetch(`https://culturapp-back.onrender.com/users/${report.usuariReportat}/unban`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+      });
+  
+      if (!response.ok) {
+        setSuccessMessage('');
+        setErrorMessage('Error banning the user');
+        throw new Error('Error setting the unban');
+      }
+      else {
+        setSuccessMessage('User successfully unbanned');
+        setErrorMessage('');
+      }
+    } catch (error) {
+      console.error('Error setting report to Done:', error);
+    }
   };
 
   function getTypeFromPlaceReport(placeReport) {
@@ -184,6 +233,14 @@ const DetailUser = ({token}) => {
               <p className="forum-value">{formatDate(report.forumMessage.fecha).day}</p>
             </div>
           )}
+          <div className="banactions">
+            <button onClick={handleBan}>Ban user</button>
+            <button onClick={handleUnban}>Unban user</button>
+          </div>
+          <div className="status-messages">
+            {successMessage && <p className="okmessage">{successMessage}</p>}
+            {errorMessage && <p className="failmessage">{errorMessage}</p>}
+          </div>
           <h3 className="detailBugsection">About the user</h3>
           <hr className="line" />
           <div className="detailBugcontent">
