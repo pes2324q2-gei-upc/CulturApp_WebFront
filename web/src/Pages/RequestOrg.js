@@ -99,13 +99,30 @@ function RequestOrg( {token} ) {
       <button className="acceptButton" onClick={(e) => {
         e.preventDefault(); // Evitar la redirección predeterminada
         handleAccept(id);
-        request.pendent = false;
+        const updatedRequests = requests.map(request => { 
+          if(request.id === id) {
+            let requestTemp = request
+            requestTemp.pendent = false;
+            return requestTemp
+          }
+          return request;
+        })
+        setRequests(updatedRequests); 
       }}> <span>Accept</span>
       </button>
       <button className="refuseButton" onClick={(e) => {
         e.preventDefault(); // Evitar la redirección predeterminada
         handleRefuse(id);
-        request.pendent = false;
+
+        const updatedRequests = requests.map(request => { 
+          if(request.id === id) {
+            let requestTemp = request
+            requestTemp.pendent = false;
+            return requestTemp
+          }
+          return request;
+        })
+        setRequests(updatedRequests); 
       }}> <span>Decline</span>
       </button>
     </div>
@@ -165,3 +182,11 @@ function RequestOrg( {token} ) {
 }
 
 export default RequestOrg;
+
+
+
+
+
+
+
+

@@ -2,7 +2,9 @@
 
 import { createContext, useContext, useState } from "react";
 import { RenderRoutes } from "./RenderRoutes";
+import Cookies from 'js-cookie';
 import Header from "../Components/Header"
+import { useEffect } from 'react';
 
 const AuthContext = createContext();
 export const AuthData = () => useContext(AuthContext);
@@ -10,6 +12,15 @@ export const AuthData = () => useContext(AuthContext);
 export const AuthWrapper = () => {
   const [user, setUser] = useState({ name: "", isAuthenticated: false });
   const [token, setToken] = useState(null)
+
+  useEffect(() => {
+    const token = Cookies.get('token');
+    if (token) {
+      Cookies.set('token', token); // Store the token in a cookie
+      setToken(token); // Set the token upon successful login
+      setUser({name: "", isAuthenticated: true});
+    }
+  }, []);
 
   const login = async (username, password) => {
     try {
@@ -30,6 +41,7 @@ export const AuthWrapper = () => {
 
       if (data === 'OK') {
         setUser({ name: username, isAuthenticated: true });
+        Cookies.set('token', token); // Store the token in a cookie
         setToken(token); // Set the token upon successful login
         return "success"; // Return success if login is successful
       } else {

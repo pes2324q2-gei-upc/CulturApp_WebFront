@@ -57,15 +57,19 @@ async function fetchUserReportById(id, token) {
 const DetailUser = ({token}) => {
   const { id } = useParams();
   const [report, setReport] = useState(null);
+  const [reportType, setType] = useState(null);
+  const [successMessage, setSuccessMessage] = useState("")
+  const [errorMessage, setErrorMessage] = useState("")
 
   useEffect(() => {
     const fetchData = async () => {
       const reportData = await fetchUserReportById(id, token);
       setReport(reportData);
+      setType(getTypeFromPlaceReport(reportData.placeReport));
     };
-
     fetchData();
   }, [id, token]);
+
 
   const handleToDo = async () => {
     try {
@@ -116,6 +120,70 @@ const DetailUser = ({token}) => {
     return { day, time };
   };
 
+  const handleBan = async() => {
+    try {
+      const response = await fetch(`https://culturapp-back.onrender.com/users/${report.usuariReportat}/ban`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+      });
+  
+      if (!response.ok) {
+        setSuccessMessage('');
+        setErrorMessage('Error banning the user');
+        throw new Error('Error');
+      }
+      else {
+        setSuccessMessage('User successfully banned');
+        setErrorMessage('');
+      }
+    } catch (error) {
+      console.error('Error setting the ban', error);
+    }
+  };
+
+  const handleUnban = async() => {
+    try {
+      const response = await fetch(`https://culturapp-back.onrender.com/users/${report.usuariReportat}/unban`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+      });
+  
+      if (!response.ok) {
+        setSuccessMessage('');
+        setErrorMessage('Error banning the user');
+        throw new Error('Error setting the unban');
+      }
+      else {
+        setSuccessMessage('User successfully unbanned');
+        setErrorMessage('');
+      }
+    } catch (error) {
+      console.error('Error setting report to Done:', error);
+    }
+  };
+
+  function getTypeFromPlaceReport(placeReport) {
+    if (placeReport.startsWith("forum")) {
+      return "Forum";
+    } else if (placeReport.startsWith("group")) {
+      return "Group";
+    } else if (placeReport.startsWith("chat")) {
+      return "Chat";
+    } else {
+      return "Unknown";
+    }
+  }
+
+  function extractIdFromPlaceReport(placeReport) {
+    return placeReport.split(" ")[1];
+  }
+
   return (
     <div className="content">
       <h1 className="detailBugtitle">Detail User report</h1>
@@ -133,10 +201,45 @@ const DetailUser = ({token}) => {
             <p className="value">{formatDate(report.data_report).day}</p>
             <p className="atribute">Time</p>
             <p className="value">{formatDate(report.data_report).time}</p>
+            <p className="atribute">Type</p>
+            <p className="value">{reportType}</p>
+            {reportType === "Forum" && (
+              <>
+                <p className="atribute">Forum ID</p>
+              </>
+            )}
+            {reportType === "Group" && (
+              <>
+                <p className="atribute">Group ID</p>
+              </>
+            )}
+            {reportType === "Chat" && (
+              <>
+                <p className="atribute">Chat ID</p>
+              </>
+            )}
+            <p className="value">{extractIdFromPlaceReport(report.placeReport)}</p>
             <p className="atribute">User reported</p>
             <p className="value">{report.usernamereported}</p>
             <p className="atribute">Mail</p>
             <p className="value">{report.mailreported}</p>
+          </div>
+          {reportType === "Forum" && report.forumMessage && (
+            <div className="forum-message">
+              <h3 className="detailBugsection">About the message</h3>
+              <p className="forum-atribute">Forum Message</p>
+              <p className="forum-value">{report.forumMessage.mensaje}</p>
+              <p className="forum-atribute">Message Date</p>
+              <p className="forum-value">{formatDate(report.forumMessage.fecha).day}</p>
+            </div>
+          )}
+          <div className="banactions">
+            <button onClick={handleBan}>Ban user</button>
+            <button onClick={handleUnban}>Unban user</button>
+          </div>
+          <div className="status-messages">
+            {successMessage && <p className="okmessage">{successMessage}</p>}
+            {errorMessage && <p className="failmessage">{errorMessage}</p>}
           </div>
           <h3 className="detailBugsection">About the user</h3>
           <hr className="line" />

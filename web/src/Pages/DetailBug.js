@@ -41,7 +41,15 @@ async function fetchBugReportById(id, token) {
 
 const DetailBug = ({ token }) => {
   const { id } = useParams();
-  const [report, setReport] = useState(null);
+  const [report, setReport] = useState(null)
+  const [open, setOpen] = useState(false)
+  const [repo, setRepo] = useState("CulturApp_Front")
+  const [successMessage, setSuccessMessage] = useState("")
+  const [errorMessage, setErrorMessage] = useState("")
+
+  const handleOpen = () => {
+    setOpen(!open);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -94,6 +102,47 @@ const DetailBug = ({ token }) => {
     }
   };
 
+  const handlerepo1 = () => {
+    setRepo("CulturApp_Front");
+    setOpen(false);
+  };
+
+  const handlerepo2 = () => {
+    setRepo("CulturApp_Back");
+    setOpen(false);
+  };
+
+  const sendissue = async (report) => {
+    try {
+      const response = await fetch(`https://api.github.com/repos/pes2324q2-gei-upc/${repo}/issues`, {
+          method: 'POST',
+          headers: {
+              'Authorization': `token ${process.env.REACT_APP_GITHUB_ACCESS_TOKEN}`,
+              'Accept': 'application/vnd.github.v3+json',
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+              title: report.titol,
+              body: report.report
+          })
+      });
+  
+      if (response.ok) {
+        setSuccessMessage('The issue was successfully created');
+        setErrorMessage('');
+      } else {
+        setErrorMessage(`Error when creating the issue: ${response.status}`);
+        const responseData = await response.json();
+        console.error(responseData);
+        setSuccessMessage('');
+      }
+    } catch (error) {
+      console.error('Error on the application:', error);
+      setErrorMessage(`Error on the applicaiton: ${error.message}`);
+      setSuccessMessage('');
+    }
+  };
+
   // Función para formatear la fecha
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -127,6 +176,30 @@ const DetailBug = ({ token }) => {
             <p className="value">{report.username}</p>
             <p className="atribute">Mail</p>
             <p className="value">{report.mail}</p>
+          </div>
+          <div className="githubissues">
+            <h3 className="detailBugsection">GitHub issues</h3>
+            <div className="github-buttons">
+              <div className="dropdown">
+                <button onClick={handleOpen} className="dropdown-button">
+                  { repo }
+                  <i className={open ? "fas fa-caret-up icon-margin" : "fas fa-caret-down icon-margin"}></i>
+                </button>
+                {open ? (
+                  <ul className="dropdown-menu">
+                    <li>
+                      <button onClick={handlerepo1}>CulturApp_Front</button>
+                    </li>
+                    <li>
+                      <button onClick={handlerepo2}>CulturApp_Back</button>
+                    </li>
+                  </ul>
+                ) : null}
+              </div>
+              <button onClick={() => sendissue(report)} className="send-button">Send issue</button>
+            </div>
+            {successMessage && <p className="okmessage">{successMessage}</p>}
+            {errorMessage && <p className="failmessage">{errorMessage}</p>}
           </div>
           <div className="detailbutton">
             {report.solucionat ? (

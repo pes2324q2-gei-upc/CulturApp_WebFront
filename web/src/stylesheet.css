@@ -20,9 +20,65 @@
 
 /*------------GLBOAL END------------*/
 
-/*------------LIST BUG END------------*/
+/*------------BANNED USERS------------*/
 
-/*------------LIST BUG END------------*/
+.search-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px auto;
+    width: 50%;
+  }
+  
+  .search-input {
+    width: 100%;
+    padding: 10px 10px 10px 40px; /* Espacio para el ícono */
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .search-icon {
+    position: absolute;
+    left: 10px;
+    font-size: 16px;
+    color: #888;
+  }
+
+  .unban-button-page {
+    outline: none;
+    cursor: pointer;
+    border: none;
+    padding: 0.9rem 2rem;
+    font-family: inherit;
+    font-size: inherit;
+    position: absolute; /* Change position to absolute */
+    right: 2%; /* Align to the maximum right */
+    top: 27%; /* Optionally, adjust the top position */
+    display: inline-block;
+    letter-spacing: 0.05rem;
+    font-weight: 700;
+    font-size: 17px;
+    border-radius: 500px;
+    overflow: hidden;
+    background: black;
+    color: ghostwhite;
+    z-index: 30;
+  }
+
+  .unban-button-page:hover {
+    background-color:#ff6e15;
+  }
+
+  .notfound {
+    color:#ff6e15;
+    text-align: center;
+    font-size: 150%;
+  }
+  
+
+/*------------BANNED USERS END------------*/
 
 /*------------DETAIL BUG------------*/
 
@@ -92,7 +148,132 @@
     background-color: #ff6e15;
 }
 
+.githubissues {
+    text-align: center;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 10px;
+    margin-left: auto; /* Centra horizontalmente automáticamente */
+    margin-right: auto;
+    margin-top: 3%;
+    width: 50%;
+}
+
+.github-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 120px;
+}
+
+.dropdown {
+    position: relative;
+    margin-right: 5%;
+    width: 40%;
+}
+
+.dropdown-button {
+    background-color: black;
+    display: inline-block;
+    width: 100%;
+}
+
+.icon-margin {
+    margin-left: 5%;
+  }  
+
+.dropdown-button:hover {
+    background-color:#ff6e15;
+}
+
+.send-button {
+    background-color: black;
+}
+
+.send-button:hover {
+    background-color:#ff6e15;
+}
+
+.dropdown-menu {
+    position: absolute;
+    list-style-type: none;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    border: 1px solid grey;
+}
+
+.dropdown-menu > li {
+    background-color: white;
+    padding: 0;
+    border: 1px solid grey;
+}
+
+.dropdown-menu > li > button {
+    width: 100%;
+    text-align: center;
+    color: black;
+    font: inherit;
+    cursor: pointer;
+    background-color: white;
+}
+
+.dropdown-menu > li > button:hover {
+    background-color: lightgray;
+}
+
+.okmessage {
+    color: green;
+}
+
+.failmessage {
+    color: red;
+}
+
 /*------------DETAIL BUG END------------*/
+
+/*------------DETAIL USER REPORT------------*/
+
+.forum-message {
+    border: 1px solid black;
+    width: 40%;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10px;
+}
+
+.forum-atribute {
+    color: #ff6e15;
+    font-size: 18px;
+    padding-left: 5%;
+}
+
+.forum-value {
+    font-size: 18px;
+    text-align: justify;
+    padding-left: 5%;
+}
+
+.banactions {
+    display: flex;
+    justify-content: center;
+    gap: 2%;
+    padding-top: 2%;
+}
+
+.banactions button {
+    background-color: black;
+}
+
+.banactions button:hover {
+    background-color: #ff6e15;
+}
+
+.status-messages {
+    text-align: center;
+}
+
+/*------------DETAIL USER REPORT END------------*/
 
 /*------------DETAIL REQUEST ORG------------*/
 
