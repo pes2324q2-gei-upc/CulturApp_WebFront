@@ -84,9 +84,8 @@ function OrgsAct( {token} ) {
       <div className="notification">
         <div className="notiglow"></div>
         <div className="notiborderglow"></div>
-        <div className="notititle">{organitzador.user}</div>
-        <div className="notibody">{truncateText(organitzador.email)}</div>
-        <div className="notibody">{truncateText(organitzador.activitat)}</div>
+        <div className="notititle">User id: {organitzador.user}</div>
+        <div className="notibody">User email: {truncateText(organitzador.email)}</div>
         <div>
           <StateButtonUI organitzador={organitzador}/>
         </div>
@@ -96,7 +95,7 @@ function OrgsAct( {token} ) {
 
   return (
     <div className="content">
-      <h1 className="titlesmenusection">Organitzadors Activitat</h1>
+      <h1 className="titlesmenusection">Organizers of Activity with id: ${id}</h1>
       {organitzadors && organitzadors.length > 0 ? (
         <ul style={{ listStyleType: 'none' }}>
           {organitzadors.map((organitzador) => (
