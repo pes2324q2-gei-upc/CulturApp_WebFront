@@ -170,22 +170,20 @@ const DetailUser = ({token}) => {
               </>
             )}
             <p className="value">{extractIdFromPlaceReport(report.placeReport)}</p>
-            {reportType === "Forum" && report.forumMessage && (
-                <div className="forum-message">
-                  <h3 className="detailBugsection">About the message</h3>
-                  <p className="forum-atribute">Forum Message</p>
-                  <p className="forum-value">{report.forumMessage.mensaje}</p>
-                  <p className="forum-atribute">Message Date</p>
-                  <p className="forum-value">{formatDate(report.forumMessage.fecha).day}</p>
-                  <p className="forum-atribute">Number of likes</p>
-                  <p className="forum-value">{report.forumMessage.numero_likes}</p>
-                </div>
-            )}
             <p className="atribute">User reported</p>
             <p className="value">{report.usernamereported}</p>
             <p className="atribute">Mail</p>
             <p className="value">{report.mailreported}</p>
           </div>
+          {reportType === "Forum" && report.forumMessage && (
+            <div className="forum-message">
+              <h3 className="detailBugsection">About the message</h3>
+              <p className="forum-atribute">Forum Message</p>
+              <p className="forum-value">{report.forumMessage.mensaje}</p>
+              <p className="forum-atribute">Message Date</p>
+              <p className="forum-value">{formatDate(report.forumMessage.fecha).day}</p>
+            </div>
+          )}
           <h3 className="detailBugsection">About the user</h3>
           <hr className="line" />
           <div className="detailBugcontent">

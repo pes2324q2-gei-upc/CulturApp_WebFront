@@ -95,7 +95,7 @@
 .githubissues {
     text-align: center;
     border: 1px solid black;
-    border-radius: 5px;
+    border-radius: 10px;
     padding: 10px;
     margin-left: auto; /* Centra horizontalmente automáticamente */
     margin-right: auto;
@@ -181,6 +181,9 @@
 .forum-message {
     border: 1px solid black;
     width: 40%;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10px;
 }
 
 .forum-atribute {
