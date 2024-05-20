@@ -41,7 +41,7 @@ function OrgsAct( {token} ) {
     console.log(organitzador.user, organitzador.activitat);
     try {
       const response = await fetch(`https://culturapp-back.onrender.com/users/${organitzador.user}/treureRol`, {
-        method: 'PUT',
+        method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`,

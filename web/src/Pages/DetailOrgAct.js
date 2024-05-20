@@ -54,7 +54,7 @@ const DetailOrgAct = ({token}) => {
   const handleDecline = async () => {
     try {
       const response = await fetch(`https://culturapp-back.onrender.com/users/${idUser}/treureRol`, {
-        method: 'PUT',
+        method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`,
@@ -92,7 +92,7 @@ const DetailOrgAct = ({token}) => {
             <p className="atribute">User</p>
             <p className="value">{user.username}</p>
             <p className="atribute">Mail</p>
-            <p className="value">{user.mail}</p>
+            <p className="value">{user.email}</p>
           </div>
           <h3 className="detailBugsection">About the activity</h3>
           <hr className="line" />
