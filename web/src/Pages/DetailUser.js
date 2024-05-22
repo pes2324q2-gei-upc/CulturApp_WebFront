@@ -60,6 +60,7 @@ const DetailUser = ({token}) => {
   const [reportType, setType] = useState(null);
   const [successMessage, setSuccessMessage] = useState("")
   const [errorMessage, setErrorMessage] = useState("")
+  const [ban, setBan] = useState(true)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -136,6 +137,7 @@ const DetailUser = ({token}) => {
         throw new Error('Error');
       }
       else {
+        setBan(false);
         setSuccessMessage('User successfully banned');
         setErrorMessage('');
       }
@@ -144,29 +146,6 @@ const DetailUser = ({token}) => {
     }
   };
 
-  const handleUnban = async() => {
-    try {
-      const response = await fetch(`https://culturapp-back.onrender.com/users/${report.usuariReportat}/unban`, {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
-        },
-      });
-  
-      if (!response.ok) {
-        setSuccessMessage('');
-        setErrorMessage('Error banning the user');
-        throw new Error('Error setting the unban');
-      }
-      else {
-        setSuccessMessage('User successfully unbanned');
-        setErrorMessage('');
-      }
-    } catch (error) {
-      console.error('Error setting report to Done:', error);
-    }
-  };
 
   function getTypeFromPlaceReport(placeReport) {
     if (placeReport.startsWith("forum")) {
@@ -233,10 +212,14 @@ const DetailUser = ({token}) => {
               <p className="forum-value">{formatDate(report.forumMessage.fecha).day}</p>
             </div>
           )}
-          <div className="banactions">
-            <button onClick={handleBan}>Ban user</button>
-            <button onClick={handleUnban}>Unban user</button>
-          </div>
+          { (ban) ? (
+            <div className="banactions">
+              <button onClick={handleBan}>Ban user</button>
+            </div>
+          )
+            :
+            null
+          }
           <div className="status-messages">
             {successMessage && <p className="okmessage">{successMessage}</p>}
             {errorMessage && <p className="failmessage">{errorMessage}</p>}
