@@ -40,8 +40,8 @@ function ActivitiesOrg( {token} ) {
       <div className="notification">
         <div className="notiglow"></div>
         <div className="notiborderglow"></div>
-        <div className="notititle">Activity id: {activitat.denominaci}</div>
-        <div className="notibody">Activity description: {truncateText(activitat.descripcio)}</div>
+        <div className="notititle">{activitat.denominaci}</div>
+        <div className="notibody">{truncateText(activitat.descripcio)}</div>
       </div>
     );
   };
