@@ -84,7 +84,8 @@ function OrgsAct( {token} ) {
       <div className="notification">
         <div className="notiglow"></div>
         <div className="notiborderglow"></div>
-        <div className="notititle"><b>User id</b>: {organitzador.user}</div>
+        <div className="notititle"></div>
+        <div className="notibody"><b>User id</b>: {organitzador.user}</div>
         <div className="notibody"><b>User email</b>: {truncateText(organitzador.email)}</div>
         <div>
           <StateButtonUI organitzador={organitzador}/>
