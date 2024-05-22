@@ -138,6 +138,7 @@ const DetailUser = ({token}) => {
       }
       else {
         setBan(false);
+        handleToDo();
         setSuccessMessage('User successfully banned');
         setErrorMessage('');
       }
