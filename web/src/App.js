@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { HashRouter as Router, Route } from 'react-router-dom';
 import { AuthWrapper } from './Logic/AuthWrapper'; // Import AuthWrapper
 import { RenderRoutes } from './Logic/RenderRoutes';
 
